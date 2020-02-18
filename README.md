@@ -1,4 +1,7 @@
-# arduino_surface_TX_4ch
+# surfTX (arduino_surface_TX_4ch)
+
+
+
 
 ![surfTX Logo](https://github.com/doohans/arduino_surface_TX_4ch/blob/master/Images/logo.png)
 
