@@ -30,7 +30,7 @@ ISR(TIMER1_COMPA_vect) {
     else {
       PORTD |= _BV(sigPin);  // set bit 1
     }
-    OCR1A = ppmPulse * 1;
+    OCR1A = ppmPulse * 2;
     state = false;
   }
   else {
@@ -44,12 +44,12 @@ ISR(TIMER1_COMPA_vect) {
     if (cur_chan_numb >= CHANNELS) {
       cur_chan_numb = 0;
       calc_rest = calc_rest + ppmPulse;
-      OCR1A = (ppmLong - calc_rest) * 1;
+      OCR1A = (ppmLong - calc_rest) * 2;
       calc_rest = 0;
     }
     else {
-      OCR1A = (ppm[cur_chan_numb] - 12 - ppmPulse) * 1;  // -12 for offset.
-      calc_rest = calc_rest + ppm[cur_chan_numb] - 12;   // -12 for offset.
+      OCR1A = (ppm[cur_chan_numb] - 16 - ppmPulse) * 2;  // -16 for correction.
+      calc_rest = calc_rest + ppm[cur_chan_numb] - 16;   // -16 for correction.
       cur_chan_numb++;
     }
   }

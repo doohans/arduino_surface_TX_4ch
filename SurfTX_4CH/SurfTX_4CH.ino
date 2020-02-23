@@ -1,3 +1,9 @@
+// ref. 1
+// This code is based on Arduino-RC-6CH-Radio-control sketch
+// Gabapentin
+// https://github.com/Gabapentin/Arduino-RC-6CH-Radio-control
+
+// ref. 2
 // This code is based on ardutx v1.3 sketch
 // (c) 2014 Patricio Reinoso
 // www.patolin.com
@@ -14,25 +20,7 @@
   along with this code. If not, see <http://www.gnu.org/licenses/>.*/
 
 // *************************************************************************************************************
-// A great Patolin idea to upgrade cheap Hobbyking HK-T6A or Flysky FS-CT6B transmitters or any other old RC TX
-// These transmitters offer a configuration through a serial port with an external PC software program
-// and no space to store more than one model.
-// *************************************************************************************************************
-// This sketch has been modified to work with SH1106 SPI 1.3" or SSD1306 SPI 0.96" OLED display through U8g2 library
-// Has been used all possible pins of ATmega328 (Arduino UNO, Nano, Pro Mini)
-// Every text strings has been stored in flash memory to mantain a lot of free RAM memory
-// Sketch terms, text, items has been translated in English to ease users/developers
-// *************************************************************************************************************
-// Added features to original Patolin code:
-// - Support for SH1106 SPI 1.3" or SSD1306 SPI 0.96"(128x64)(U8g2 library)
-// - Switches checking status with sound alert at power ON and display which is not in default position
-// - Throttle warning with display status and sound alert
-// - Hidden data default restoring by pressing and hold Down/Next button on power on
-// - Hidden calibration procedure by pressing and hold Menu/Select button on power on
-// - Low battery control in real time whith buzzer sound(buzzer with stand alone sound generator)
-// - N°2 supplementary switch, they can be configured instead of VRA or VRB pots(SWA, SWB)(Servo Direction Menu)
-// - Basic two channel mixer with switch activation V-Mix (Ch1/ch2)
-// - Basic four channels Sub Trim setting (ch1, ch2, ch3, ch4)
+//
 // *************************************************************************************************************
 // Recommended Arduino IDE 1.8.2 // Seems to be optimized and stable compiler. Less Flash and RAM used
 // Arduino AVR Boards 1.6.18
@@ -117,10 +105,12 @@
 
 void setup() {
 
-  Serial.begin(115200);
+  //Serial.begin(115200);
 
   // LCD config with U8G2 library display init (mandatory)
   u8g2.begin();
+
+  u8g2.setContrast(115);
 
   // Set font type
   u8g2.setFont(u8g2_font_5x7_tr);
@@ -155,13 +145,12 @@ void setup() {
   // Input ADC sampling rate for reading analog input pots (1000 KHz is maximum for stable reading)
   // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-  ADCSRA &= ~( (1 << ADPS0) | (1 << ADPS1) | (1 << ADPS2) );   // Remove bit settings from Arduino library
-  //ADCSRA |= (1 << ADPS1);                                  // Set ADC prescaler to 16 (1000 KHz)
-  ADCSRA |= bit (ADPS0) | bit (ADPS2);                 //  Set ADC prescaler to 32 (1000 KHz) for 8Mhz crystal
-
+  ADCSRA &= ~((1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0));   // Remove bit settings from Arduino library
+  ADCSRA |= (1 << ADPS2);                                  // Set ADC prescaler to 16 (1000 KHz)
+  //ADCSRA |= (1 << ADPS1) | (1 << ADPS0);                     // Set ADC prescaler to 8 (1000 KHz)
 
   ADMUX |= (1 << REFS0);
-  ADMUX &= ~(1 << REFS1);                                  // Avcc(+3.3v or +5v) as voltage reference
+  ADMUX &= ~(1 << REFS1);                                  // Avcc(+5v) as voltage reference
 
   ADCSRB &= ~((1 << ADTS2) | (1 << ADTS1) | (1 << ADTS0)); // ADC in free-running mode
 
