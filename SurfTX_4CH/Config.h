@@ -69,6 +69,16 @@ U8G2_PCD8544_84X48_1_4W_HW_SPI u8g2(U8G2_R0, /* cs=*/ 10, /* dc=*/ 9, /* reset=*
 
 #define MENU_COUNT 7            // Total Menu Count
 
+#if F_CPU == 16000000L
+#define OCR_MUL 2
+#define KEY_DELAY 50
+#else
+#define OCR_MUL 1
+#define KEY_DELAY 10
+#endif
+
+#define VCC 33       // arduino VCC 5(5v) or 33(3.3v)
+
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // version
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

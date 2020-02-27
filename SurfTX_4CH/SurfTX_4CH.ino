@@ -110,7 +110,8 @@ void setup() {
   // LCD config with U8G2 library display init (mandatory)
   u8g2.begin();
 
-  u8g2.setContrast(115);
+  if(VCC == 5)
+    u8g2.setContrast(115);
 
   // Set font type
   u8g2.setFont(u8g2_font_5x7_tr);
