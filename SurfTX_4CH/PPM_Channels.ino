@@ -23,8 +23,8 @@ void readPots() {
       // Calculate Center offset 
       int centerOffset = potCenter - centerPos[i];
 
-      // Applying initial value with center offset and subtrim value.
-      pots[i] = raw_Pots[i] + centerOffset + subTrim[i];
+      // Applying initial value with center offset.
+      pots[i] = raw_Pots[i] + centerOffset;
 
       // range out correction.
       if (pots[i] < calibration[i][0]) pots[i] = calibration[i][0];
@@ -69,6 +69,9 @@ void readPots() {
       if (bitRead(servoReverse, i) == 1) {
         tempPPM = ppmMax - tempPPM + ppmMin;
       }
+
+      //apply subtrim value
+      tempPPM += subTrim[i];
 
     } else {
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

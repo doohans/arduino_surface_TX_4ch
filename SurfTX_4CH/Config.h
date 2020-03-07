@@ -22,7 +22,7 @@ U8G2_PCD8544_84X48_1_4W_HW_SPI u8g2(U8G2_R0, /* cs=*/ 10, /* dc=*/ 9, /* reset=*
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #define servoCenter 1500             // Servo center value (us)
 //#define ppmLong 18500                // ppm frame (us) for 6 channels
-#define ppmLong 14000                // ppm frame (us) for 4 channels
+#define ppmLong 18500                // ppm frame (us) for 4 channels
 #define ppmPulse 300                 // ppm pulse width (us)
 #define onState 0                    // Polarity: 0 neg / 1 pos
 #define sigPin PD7                   // ppm output pin
@@ -77,7 +77,7 @@ U8G2_PCD8544_84X48_1_4W_HW_SPI u8g2(U8G2_R0, /* cs=*/ 10, /* dc=*/ 9, /* reset=*
 #define KEY_DELAY 10
 #endif
 
-#define VCC 33       // arduino VCC 5(5v) or 33(3.3v)
+#define VCC 5       // arduino VCC 5(5v) or 33(3.3v)
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // version
@@ -114,7 +114,7 @@ unsigned char dual_rate_low[CHANNELS];        // Dual Rates LOW value array
 unsigned char dual_rate_hi[CHANNELS];         // Dual Rates HIGH value array
 unsigned char expo[CHANNELS];                 // Expo value array
 
-unsigned short int  deadBand = 28;            // Deadband center stick value (25 suggested value)
+unsigned short int  deadBand = 25;            // Deadband center stick value (25 suggested value)
 short  subTrim[CHANNELS];                     // Sub Trim channel array
 unsigned short int  subTrimSelection = 0xFF;  // Default value for Sub Trim
 
@@ -201,8 +201,8 @@ const char* const messages[] PROGMEM = {
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 const char chName_0[] PROGMEM = "STR";
 const char chName_1[] PROGMEM = "THR";
-const char chName_2[] PROGMEM = "CH4";
-const char chName_3[] PROGMEM = "CH5";
+const char chName_2[] PROGMEM = "CH3";
+const char chName_3[] PROGMEM = "CH4";
 const char chName_4[] PROGMEM = "UP";
 const char chName_5[] PROGMEM = "DOWN";
 const char chName_6[] PROGMEM = "SWA";
