@@ -53,8 +53,8 @@ U8G2_PCD8544_84X48_1_4W_HW_SPI u8g2(U8G2_R0, /* cs=*/ 10, /* dc=*/ 9, /* reset=*
 #define swB 12                       // Switch B Digital pin (active LOW)
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#define minBat 70                    // Minimum battery voltage for alarm (70 = 7.0V)
-#define maxBat 82                    // Maximum battery voltage (10V) (82 = 8.2V)
+#define minBat 32                    // Minimum battery voltage for alarm (70 = 7.0V)
+#define maxBat 42                    // Maximum battery voltage (10V) (82 = 8.2V)
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -71,7 +71,7 @@ U8G2_PCD8544_84X48_1_4W_HW_SPI u8g2(U8G2_R0, /* cs=*/ 10, /* dc=*/ 9, /* reset=*
 
 #if F_CPU == 16000000L
 #define OCR_MUL 2
-#define KEY_DELAY 50
+#define KEY_DELAY 25
 #else
 #define OCR_MUL 1
 #define KEY_DELAY 10
@@ -146,7 +146,7 @@ int total = 0;                       // Running total
 int average = 0;                     // Average value
 
 float pin_batt_read;                 // Raw input battery pin value from average reading
-float batt_volt;                     // Battery voltage calculated
+int batt_volt;                     // Battery voltage calculated
 float res_calc;                      // Calculation of voltage divider to be applied to the conversion
 float R1 = 10000;                    // If you need more precision, measure voltage divider resistors value
 float R2 = 10000;                    // with digital multimeter and put them in to R1 R2 variables

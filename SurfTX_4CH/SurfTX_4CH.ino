@@ -339,7 +339,7 @@ void setup() {
   u8g2.setFont(u8g2_font_5x7_tr);
 
   // for boot logo duration
-  delay(1300);
+  delay(1000);
 }
 
 // End of Setup +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

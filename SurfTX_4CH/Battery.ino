@@ -31,9 +31,10 @@ void batteryCheck() {
 
   // Calculating correct voltage value through voltage divider 
   // Result = 2 digits with 2 decimal (eg 72 = 7.2V)
-  batt_volt = pin_batt_read * res_calc / 10;
+  //batt_volt = pin_batt_read * res_calc / 10;
+  batt_volt = (int)(pin_batt_read / 10);
   
- // Serial.println (batt_volt);
+  //Serial.println (batt_volt);
 
   // Mapping voltage for drawing battery bar
   perc_batt = map(batt_volt, minBat, maxBat, 1, 10);
@@ -43,7 +44,8 @@ void batteryCheck() {
  //Serial.println (perc_batt);
   
   // Low battery beep alarm
-  if (perc_batt <= 1 || battStatus == 0) {
+  //if (perc_batt <= 1 || battStatus == 0) {
+  if (perc_batt <= 1 ) {
 
     // Set byte 0 to mantain battery alarm even voltage floating +/- on minBat value
     battStatus = 0;
