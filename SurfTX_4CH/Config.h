@@ -53,8 +53,8 @@ U8G2_PCD8544_84X48_1_4W_HW_SPI u8g2(U8G2_R0, /* cs=*/ 10, /* dc=*/ 9, /* reset=*
 #define swB 12                       // Switch B Digital pin (active LOW)
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#define minBat 32                    // Minimum battery voltage for alarm (70 = 7.0V)
-#define maxBat 42                    // Maximum battery voltage (10V) (82 = 8.2V)
+#define minBat 32                    // Minimum battery voltage for alarm (32 = 3.2V)
+#define maxBat 42                    // Maximum battery voltage (7V) (42 = 4.2V)
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -82,7 +82,7 @@ U8G2_PCD8544_84X48_1_4W_HW_SPI u8g2(U8G2_R0, /* cs=*/ 10, /* dc=*/ 9, /* reset=*
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // version
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-const char ver_str[] PROGMEM = "1.0";
+const char ver_str[] PROGMEM = "1.1";
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 unsigned short int ppm[CHANNELS];                       // ppm output array
@@ -114,7 +114,7 @@ unsigned char dual_rate_low[CHANNELS];        // Dual Rates LOW value array
 unsigned char dual_rate_hi[CHANNELS];         // Dual Rates HIGH value array
 unsigned char expo[CHANNELS];                 // Expo value array
 
-unsigned short int  deadBand = 25;            // Deadband center stick value (25 suggested value)
+unsigned short int  deadBand = 30;            // Deadband center stick value (25 suggested value)
 short  subTrim[CHANNELS];                     // Sub Trim channel array
 unsigned short int  subTrimSelection = 0xFF;  // Default value for Sub Trim
 

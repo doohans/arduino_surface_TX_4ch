@@ -13,22 +13,22 @@ void readPots() {
 
       // Applying calibration mapping
       // In case of surface TX, Left and Right rotation rate should be same.
-      // So, Longer side length is used for both side. 
+      // So, Longer side length is used for both side.
       int gap = calibration[i][1] - centerPos[i];
       int gapTemp = centerPos[i] - calibration[i][0];
 
       // Select longer side
       if (gap < gapTemp) gap = gapTemp;
 
-      // Calculate Center offset 
+      // Calculate Center offset
       int centerOffset = potCenter - centerPos[i];
 
       // Applying initial value with center offset.
       pots[i] = raw_Pots[i] + centerOffset;
 
       // range out correction.
-      if (pots[i] < calibration[i][0]) pots[i] = calibration[i][0];
-      if (pots[i] > calibration[i][1]) pots[i] = calibration[i][1];
+      if (pots[i] < calibration[i][0] + centerOffset) pots[i] = calibration[i][0] + centerOffset;
+      if (pots[i] > calibration[i][1] + centerOffset) pots[i] = calibration[i][1] + centerOffset;
 
       int dRateVal = 0;
 
@@ -49,20 +49,20 @@ void readPots() {
         tempPPM = map(pots[i], potCenter - gap, potCenter - deadBand, ppmMin + dRateVal, servoCenter);
 
         //expo.
-        if(expo[i] > 0)
+        if (expo[i] > 0)
           tempPPM = calc_expo(tempPPM, ppmMin + dRateVal, expo[i]);
-        
+
         if (tempPPM < ppmMin) tempPPM = ppmMin;
       } else if (pots[i]  > (potCenter + deadBand)) {
         tempPPM = map(pots[i], potCenter + deadBand, potCenter + gap - 1, servoCenter, ppmMax - dRateVal);
 
         //expo.
-        if(expo[i] > 0)
+        if (expo[i] > 0)
           tempPPM = calc_expo(tempPPM, ppmMax - dRateVal, expo[i]);
-        
+
         if (tempPPM > ppmMax) tempPPM = ppmMax;
       } else {
-        tempPPM = servoCenter;      
+        tempPPM = servoCenter;
       }
 
       // Check Servo Reversing and applying Reverse value if necessary
@@ -84,7 +84,7 @@ void readPots() {
         }
         else {
           // VRA pot mapping (CH3)
-          tempPPM = map(read_adc(2), potMin, potMax, ppmMin, ppmMax);
+          tempPPM = map(read_adc(2), calibration[i][0], calibration[i][1], ppmMin, ppmMax);
         }
       }
 
@@ -98,7 +98,7 @@ void readPots() {
         }
         else {
           // VRB pot mapping (CH4)
-          tempPPM = map(read_adc(3), potMin, potMax, ppmMin, ppmMax);
+          tempPPM = map(read_adc(3), calibration[i][0], calibration[i][1], ppmMin, ppmMax);
         }
       }
     }
