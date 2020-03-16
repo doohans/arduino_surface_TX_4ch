@@ -265,6 +265,7 @@ const char character_15[] PROGMEM = "?";
 const char character_16[] PROGMEM = "/";
 const char character_17[] PROGMEM = ".";
 const char character_18[] PROGMEM = "V";
+const char character_19[] PROGMEM = "E";
 
 const char* const one_char[] PROGMEM = {
   character_0,
@@ -285,7 +286,8 @@ const char* const one_char[] PROGMEM = {
   character_15,
   character_16,
   character_17,
-  character_18
+  character_18,
+  character_19
 };
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

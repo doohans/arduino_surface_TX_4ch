@@ -118,7 +118,7 @@ void Screen_0() {
     //Drawing vertical middle/center separation line
     u8g2.drawVLine(42, 22, 20);
 
-    // Drawing only first 4 channels
+    // Drawing only first 2 channels
     for (int i = 0; i < 2; i++) {
 
       // Define value bar reference
@@ -131,7 +131,11 @@ void Screen_0() {
       u8g2.drawFrame(10, 24 + (i * 9), 64, 7);
 
       // Drawing cursor in every channel bar
-      u8g2.drawBox(11 + valBar, 24 + (i * 9), 3, 6);
+      if (ppm[i] < servoCenter) {
+        u8g2.drawBox(11 + valBar, 24 + (i * 9), 30 - valBar + 1, 6);
+      } else if (ppm[i] > servoCenter) {
+        u8g2.drawBox(11 + 30 + 1, 24 + (i * 9), valBar - 30 + 2, 6);
+      }
 
       // Dual Rates switch status checking
       if (dr_check == 1) {
@@ -161,14 +165,15 @@ void Screen_0() {
         u8g2.setCursor(76, 30 + i * 9);
         u8g2.print(char_buffer);
       }
-
+      
       //Expo
       if (expo[i] > 0) {
         // Print "E" character
-        strcpy_P(char_buffer, (char*)pgm_read_word(&(channel_name[19])));
+        strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[19])));
         u8g2.setCursor(80, 30 + i * 9);
         u8g2.print(char_buffer);
       }
+      
       u8g2.setFont(u8g2_font_5x7_tr);
     }
 

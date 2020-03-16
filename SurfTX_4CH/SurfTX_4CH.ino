@@ -32,8 +32,8 @@
   +++++++++++++++++
   Steering  CH1 = A0
   Throtle   CH2 = A1
-  Pot VRA  CH3 = A4
-  Pot VRB  CH4 = A5
+  Pot VRA  CH3 = A2
+  Pot VRB  CH4 = A3
 
   //---------------------------------------------------------------------------------------------
   // 2 position switch (pin A6 in the center, VCC and GND at both ends)
@@ -110,7 +110,7 @@ void setup() {
   // LCD config with U8G2 library display init (mandatory)
   u8g2.begin();
 
-  if(VCC == 5)
+  if (VCC == 5)
     u8g2.setContrast(115);
 
   // Set font type
@@ -185,9 +185,7 @@ void setup() {
   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   // Initialize value for average ADC readings
   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
   for (int thisReading = 0; thisReading < numReadings; thisReading++)
-
     readings[thisReading] = 0; // initialize all the readings to 0
 
   //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -243,11 +241,6 @@ void setup() {
 
     u8g2.firstPage();
     do {
-      // confirm msg
-      // Print "WARNING !!!" text string
-      strcpy_P(msg_buffer, (char*)pgm_read_word(&(messages[6])));
-      u8g2.setCursor(0, 10);
-      u8g2.print(msg_buffer);
 
       // Print "ERASE DATA" text string
       strcpy_P(msg_buffer, (char*)pgm_read_word(&(messages[5])));
@@ -300,7 +293,7 @@ void setup() {
           isWait = false;
           break;
         case 2:
-          // sel button
+          // upbutton
           isWait = false;
 
           // Recall "Reset to default" macro
@@ -314,16 +307,11 @@ void setup() {
             u8g2.print(msg_buffer);
 
           } while (u8g2.nextPage());
-
-          delay(2000); // Screen message for 2sec)
-
-          break;
-        default:
+          
           break;
       }
     }
 
-    delay(10);
 
   }
 
