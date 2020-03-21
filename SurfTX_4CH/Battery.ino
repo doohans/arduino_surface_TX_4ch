@@ -1,7 +1,7 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Macro to calculate average ADC value, checking battery voltage alarm and value for battery bar
 // For minBat do not under default value in config file because arduino will be more unstable.
-// About 16%(presumed)of battery is enough to landing ASAP   
+// About 16%(presumed)of battery is enough to landing ASAP
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 void batteryCheck() {
 
@@ -29,11 +29,11 @@ void batteryCheck() {
   // Mapping battery voltage from average from 0 to 5V
   pin_batt_read = map(average, 0, 1023, 0, 500);
 
-  // Calculating correct voltage value through voltage divider 
+  // Calculating correct voltage value through voltage divider
   // Result = 2 digits with 2 decimal (eg 72 = 7.2V)
   batt_volt = pin_batt_read * res_calc / 10;
 
-  
+
   //Serial.println (batt_volt);
 
   // Mapping voltage for drawing battery bar
@@ -41,8 +41,8 @@ void batteryCheck() {
   perc_batt = constrain(perc_batt, 1, 10);
 
 
- //Serial.println (perc_batt);
-  
+  //Serial.println (perc_batt);
+
   // Low battery beep alarm
   //if (perc_batt <= 1 || battStatus == 0) {
   if (perc_batt <= 1 ) {
@@ -52,13 +52,14 @@ void batteryCheck() {
 
     // Set value to mantain battery bar to min value even voltage is under minBat
     perc_batt = 1;
-    
+
     // Recall pulse for buzzer
     beep();
   }
-  
+
   // Buzzer alarm OFF
   else {
-    PORTD &= ~_BV(buzzer);
-    }
+    //PORTD &= ~_BV(buzzer);
+    noTone(buzzer);    
+  }
 }

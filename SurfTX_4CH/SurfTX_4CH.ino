@@ -333,9 +333,7 @@ void setup() {
 // End of Setup +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 void loop() {
-
-  // Start Calibration screen if button Enter/Select is pressed on power on ***********************
-
+  // Start Calibration screen if button Enter/Select is pressed on power on ***********************  
   if (readKeys() == 2 && statusCalib == 1) {
 
     Calibration();    // Recall calibration procedure
