@@ -22,7 +22,7 @@ U8G2_PCD8544_84X48_1_4W_HW_SPI u8g2(U8G2_R0, /* cs=*/ 10, /* dc=*/ 9, /* reset=*
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #define servoCenter 1500             // Servo center value (us)
 //#define ppmLong 18500                // ppm frame (us) for 6 channels
-#define ppmLong 18500                // ppm frame (us) for 4 channels
+#define ppmLong 18500                // ppm frame (us) for 6 channels
 #define ppmPulse 300                 // ppm pulse width (us)
 #define onState 0                    // Polarity: 0 neg / 1 pos
 #define sigPin PD7                   // ppm output pin
