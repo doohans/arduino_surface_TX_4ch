@@ -566,7 +566,7 @@ void loop() {
             if (subTrim[subTrimSelection / 1] > potCenter * -1) {
 
               // Define step value
-              subTrim[subTrimSelection / 1] -= 5;
+              subTrim[subTrimSelection / 1] -= 1;
             }
           }
         }
@@ -730,7 +730,7 @@ void loop() {
             if ((subTrim[subTrimSelection / 1]) < potCenter) {
 
               // Define step value
-              subTrim[subTrimSelection / 1] += 5;
+              subTrim[subTrimSelection / 1] += 1;
             }
           }
         }

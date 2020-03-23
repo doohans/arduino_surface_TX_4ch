@@ -48,8 +48,8 @@ ISR(TIMER1_COMPA_vect) {
       calc_rest = 0;
     }
     else {
-      OCR1A = (ppm[cur_chan_numb] - 22 - ppmPulse) * OCR_MUL;  // -22 for correction.
-      calc_rest = calc_rest + ppm[cur_chan_numb] - 22;   // -22 for correction.
+      OCR1A = (ppm[cur_chan_numb] - ppmPulse) * OCR_MUL; 
+      calc_rest = calc_rest + ppm[cur_chan_numb]; 
       cur_chan_numb++;
     }
   }
