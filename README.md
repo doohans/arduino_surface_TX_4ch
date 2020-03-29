@@ -14,7 +14,10 @@ The focus of this project is Making PISTOL type TX for surface vehicle such as c
 3. Modify Range and Center Calibration Feature
 4. Modify PPM calculation logic (more suitable for surface vehicle)
 5. Preventing EEPROM worn lifetime
-6. Remove Throttle Cut Feature
+6. Remove Throttle Cut Feature and Warning Screen
 7. Modify Low Voltage Beep Pattern
 
 And many of codes modified for surface vehicle.
+
+
+This needs First Startup Procedures (almost same with Gabapentin's https://github.com/Gabapentin/Arduino-RC-6CH-Radio-control/wiki/5.-First-Startup-Procedures)
