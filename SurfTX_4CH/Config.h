@@ -67,7 +67,7 @@ U8G2_PCD8544_84X48_1_4W_HW_SPI u8g2(U8G2_R0, /* cs=*/ 10, /* dc=*/ 9, /* reset=*
 #define dualRateSwEepromAddr 1022
 #define actualModelEepromAddr 1023
 
-#define MENU_COUNT 7            // Total Menu Count
+#define MENU_COUNT 8            // Total Menu Count
 
 #if F_CPU == 16000000L
 #define OCR_MUL 2
@@ -82,7 +82,7 @@ U8G2_PCD8544_84X48_1_4W_HW_SPI u8g2(U8G2_R0, /* cs=*/ 10, /* dc=*/ 9, /* reset=*
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // version
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-const char ver_str[] PROGMEM = "1.1";
+const char ver_str[] PROGMEM = "1.2";
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 unsigned short int ppm[CHANNELS];                       // ppm output array
@@ -117,6 +117,9 @@ unsigned char expo[CHANNELS];                 // Expo value array
 unsigned short int  deadBand = 30;            // Deadband center stick value (25 suggested value)
 short  subTrim[CHANNELS];                     // Sub Trim channel array
 unsigned short int  subTrimSelection = 0xFF;  // Default value for Sub Trim
+
+unsigned char epa[CHANNELS];                  // EPA channel array
+unsigned short int  epaSelection = 0xFF;      // Default value for EPA
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Model Name
@@ -164,6 +167,7 @@ const char menu_3[] PROGMEM = "SAVE MODEL DATA";
 const char menu_4[] PROGMEM = "SUB TRIM SETUP";
 const char menu_5[] PROGMEM = "SET MODEL NAME";
 const char menu_6[] PROGMEM = "EXP SETUP";
+const char menu_7[] PROGMEM = "ENDPOINT ADJ";
 
 const char* const menu_name[] PROGMEM = {
   menu_0,
@@ -172,7 +176,8 @@ const char* const menu_name[] PROGMEM = {
   menu_3,
   menu_4,
   menu_5,
-  menu_6
+  menu_6,
+  menu_7
 };
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

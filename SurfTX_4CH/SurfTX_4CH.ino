@@ -307,7 +307,7 @@ void setup() {
             u8g2.print(msg_buffer);
 
           } while (u8g2.nextPage());
-          
+
           break;
       }
     }
@@ -333,7 +333,7 @@ void setup() {
 // End of Setup +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 void loop() {
-  // Start Calibration screen if button Enter/Select is pressed on power on ***********************  
+  // Start Calibration screen if button Enter/Select is pressed on power on ***********************
   if (readKeys() == 2 && statusCalib == 1) {
 
     Calibration();    // Recall calibration procedure
@@ -387,6 +387,9 @@ void loop() {
       }
       if (menuActual == 7) {  // Execute "Exp Setup" task
         Menu_7();
+      }
+      if (menuActual == 8) {  // Execute "Endpoint Adj" task
+        Menu_8();
       }
     }
   }
@@ -472,6 +475,17 @@ void loop() {
         }
         else {
           expSelection = menuSubActual - 1;
+        }
+      }
+
+      if (menuActual == 8) {
+
+        // Selection value for EPA
+        if (epaSelection != 0xFF) {
+          epaSelection = 0xFF;
+        }
+        else {
+          epaSelection = menuSubActual - 1;
         }
       }
     }
@@ -624,14 +638,41 @@ void loop() {
 
         break;
 
+      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      // EPA screen step control for selecting channels/values (buttonDown)
+      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      case 8:
+
+        // Initial value for EPA selection value
+        if (epaSelection == 0xFF) {
+
+          // Only first 2 channels
+          if (menuSubActual < 2) { // 2 channels
+            menuSubActual++;
+            if (screen == 0) {
+              screen++;
+            }
+          }
+        }
+        // EPA step control for changing selected channel value(DOWN)
+        else {
+          if (epa[epaSelection] > 0) {
+
+            // Define step value
+            epa[epaSelection]--;
+          }
+        }
+
+        break;
+
       default:
 
 
         if (menuSubActual < MENU_COUNT) {  // 1 to 5 items
           menuSubActual++;
-          if (screen == 0) {
-            screen++;
-          }
+          //if (screen == 0) {
+          //  screen++;
+          //}
         }
         menuPage = (menuSubActual - 1) / 5;
         break;
@@ -784,6 +825,34 @@ void loop() {
 
             // Define step value
             expo[expSelection]++;
+          }
+        }
+        break;
+
+      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      // EPA screen step control for selecting channels/values (buttonUp)
+      //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      case 8:
+
+        // Initial value for EPA selection value
+        if (epaSelection == 0xFF) {
+          if (menuSubActual < 2) {
+            screen--;
+            menuSubActual = 8;
+            menuActual = 0;
+          }
+          else {
+            menuSubActual--;
+          }
+        }
+
+        // Step control for changing selected channel value UP
+        else {
+          // Define Max for EPA value
+          if (epa[epaSelection] < 100) {
+
+            // Define step value
+            epa[epaSelection]++;
           }
         }
         break;
