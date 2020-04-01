@@ -167,7 +167,7 @@ const char menu_3[] PROGMEM = "SAVE MODEL DATA";
 const char menu_4[] PROGMEM = "SUB TRIM SETUP";
 const char menu_5[] PROGMEM = "SET MODEL NAME";
 const char menu_6[] PROGMEM = "EXP SETUP";
-const char menu_7[] PROGMEM = "ENDPOINT ADJ";
+const char menu_7[] PROGMEM = "END POINT ADJ";
 
 const char* const menu_name[] PROGMEM = {
   menu_0,

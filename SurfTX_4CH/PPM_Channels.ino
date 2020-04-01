@@ -52,15 +52,14 @@ void readPots() {
         if (expo[i] > 0)
           tempPPM = calc_expo(tempPPM, ppmMin + dRateVal, expo[i]);
 
-        if (tempPPM < ppmMin) tempPPM = ppmMin;
+        
       } else if (pots[i]  > (potCenter + deadBand)) {
         tempPPM = map(pots[i], potCenter + deadBand, potCenter + gap - 1, servoCenter, ppmMax - dRateVal);
 
         //expo.
         if (expo[i] > 0)
           tempPPM = calc_expo(tempPPM, ppmMax - dRateVal, expo[i]);
-
-        if (tempPPM > ppmMax) tempPPM = ppmMax;
+        
       } else {
         tempPPM = servoCenter;
       }
@@ -72,6 +71,17 @@ void readPots() {
 
       //apply subtrim value
       tempPPM += subTrim[i];
+
+      //EPA check
+      short epaAmt = 500 - (500 * epa[i] / 100);
+      short epaMin = ppmMin + epaAmt;
+      short epaMax = ppmMax - epaAmt;
+      if(tempPPM < epaMin) tempPPM = epaMin;
+      if(tempPPM > epaMax) tempPPM = epaMax;
+      
+      //Min Max Validation
+      if (tempPPM < ppmMin) tempPPM = ppmMin;
+      if (tempPPM > ppmMax) tempPPM = ppmMax;
 
     } else {
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

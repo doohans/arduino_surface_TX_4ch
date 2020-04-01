@@ -110,8 +110,9 @@ void setup() {
   // LCD config with U8G2 library display init (mandatory)
   u8g2.begin();
 
+  
   if (VCC == 5)
-    u8g2.setContrast(115);
+    u8g2.setContrast(119);
 
   // Set font type
   u8g2.setFont(u8g2_font_5x7_tr);
@@ -327,7 +328,7 @@ void setup() {
   u8g2.setFont(u8g2_font_5x7_tr);
 
   // for boot logo duration
-  delay(1000);
+  delay(400);
 }
 
 // End of Setup +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

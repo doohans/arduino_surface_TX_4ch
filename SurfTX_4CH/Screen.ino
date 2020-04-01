@@ -132,23 +132,27 @@ void Screen_0() {
 
       // Drawing cursor in every channel bar
       if (ppm[i] < servoCenter) {
-        u8g2.drawBox(11 + valBar, 24 + (i * 9), 30 - valBar + 1, 6);
+        u8g2.drawBox(11 + valBar-1, 24 + (i * 9), 30 - valBar + 2, 6);
       } else if (ppm[i] > servoCenter) {
         u8g2.drawBox(11 + 30 + 1, 24 + (i * 9), valBar - 30 + 2, 6);
       }
 
+      //EPA
+      u8g2.drawVLine(42 - (30 * epa[i]  / 100) - 2 , 25 + (i * 9), 2);
+      u8g2.drawVLine(42 + (30 * epa[i]  / 100) + 1 , 25 + (i * 9), 2);
+      
       // Dual Rates switch status checking
       if (dr_check == 1) {
         // DR L
-        u8g2.drawVLine(42 - (30 * dual_rate_low[i] / 100) - 2 , 27 + (i * 9), 4);
-        u8g2.drawVLine(42 + (30 * dual_rate_low[i] / 100) + 1 , 27 + (i * 9), 4);
+        u8g2.drawVLine(42 - (30 * dual_rate_low[i] / 100) - 2 , 28 + (i * 9), 2);
+        u8g2.drawVLine(42 + (30 * dual_rate_low[i] / 100) + 1 , 28 + (i * 9), 2);
       }
 
       if (dr_check == 2) {
         // DR H
-        u8g2.drawVLine(42 - (30 * dual_rate_hi[i]  / 100) - 2 , 27 + (i * 9), 4);
-        u8g2.drawVLine(42 + (30 * dual_rate_hi[i]  / 100) + 1 , 27 + (i * 9), 4);
-      }
+        u8g2.drawVLine(42 - (30 * dual_rate_hi[i]  / 100) - 2 , 28 + (i * 9), 2);
+        u8g2.drawVLine(42 + (30 * dual_rate_hi[i]  / 100) + 1 , 28 + (i * 9), 2);
+      }     
 
       u8g2.setFont(u8g2_font_4x6_tr);
       if (bitRead(servoReverse, i) == 1) {
@@ -1146,7 +1150,7 @@ void Menu_8 () {
 
     // Print "ENDPOINT ADJ" text string
     strcpy_P(menu_buffer, (char*)pgm_read_word(&(menu_name[7])));
-    u8g2.setCursor(45, 6);
+    u8g2.setCursor(40, 6);
     u8g2.print(menu_buffer);
 
   } while (u8g2.nextPage());
