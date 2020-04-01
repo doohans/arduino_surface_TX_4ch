@@ -58,7 +58,15 @@ void resetEeprom() {
       // Writing default Expo. for channels
       EEPROM.update(eepromPos++, 0);
     }
-    
+
+    // Writing EPA values for every channels in every model memory bank
+    // Writing values will start after first address of start position
+    for (int i = 0; i < CHANNELS - 2; i++) {
+
+      // Writing default Expo. for channels
+      EEPROM.update(eepromPos++, 100);
+    }
+
   }
 }
 
@@ -105,6 +113,11 @@ unsigned char storedDataEeprom(unsigned char mod) {
   // Read Expo values after first position
   for (int i = 0; i < CHANNELS - 2; i++) {
     expo[i] = EEPROM.read(eepromPos++);
+  }
+
+  // Read EPA values after first position
+  for (int i = 0; i < CHANNELS - 2; i++) {
+    epa[i] = EEPROM.read(eepromPos++);
   }
   
   unsigned int posEeprom;

@@ -18,7 +18,7 @@ unsigned char readKeys() {
     delay(KEY_DELAY);
     return 3;
   }
-  else {
-    return 0;
-  }
+
+  return 0;
+
 }

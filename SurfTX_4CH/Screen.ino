@@ -132,23 +132,27 @@ void Screen_0() {
 
       // Drawing cursor in every channel bar
       if (ppm[i] < servoCenter) {
-        u8g2.drawBox(11 + valBar, 24 + (i * 9), 30 - valBar + 1, 6);
+        u8g2.drawBox(11 + valBar-1, 24 + (i * 9), 30 - valBar + 2, 6);
       } else if (ppm[i] > servoCenter) {
         u8g2.drawBox(11 + 30 + 1, 24 + (i * 9), valBar - 30 + 2, 6);
       }
 
+      //EPA
+      u8g2.drawVLine(42 - (30 * epa[i]  / 100) - 2 , 25 + (i * 9), 2);
+      u8g2.drawVLine(42 + (30 * epa[i]  / 100) + 1 , 25 + (i * 9), 2);
+      
       // Dual Rates switch status checking
       if (dr_check == 1) {
         // DR L
-        u8g2.drawVLine(42 - (30 * dual_rate_low[i] / 100) - 2 , 27 + (i * 9), 4);
-        u8g2.drawVLine(42 + (30 * dual_rate_low[i] / 100) + 1 , 27 + (i * 9), 4);
+        u8g2.drawVLine(42 - (30 * dual_rate_low[i] / 100) - 2 , 28 + (i * 9), 2);
+        u8g2.drawVLine(42 + (30 * dual_rate_low[i] / 100) + 1 , 28 + (i * 9), 2);
       }
 
       if (dr_check == 2) {
         // DR H
-        u8g2.drawVLine(42 - (30 * dual_rate_hi[i]  / 100) - 2 , 27 + (i * 9), 4);
-        u8g2.drawVLine(42 + (30 * dual_rate_hi[i]  / 100) + 1 , 27 + (i * 9), 4);
-      }
+        u8g2.drawVLine(42 - (30 * dual_rate_hi[i]  / 100) - 2 , 28 + (i * 9), 2);
+        u8g2.drawVLine(42 + (30 * dual_rate_hi[i]  / 100) + 1 , 28 + (i * 9), 2);
+      }     
 
       u8g2.setFont(u8g2_font_4x6_tr);
       if (bitRead(servoReverse, i) == 1) {
@@ -165,7 +169,7 @@ void Screen_0() {
         u8g2.setCursor(76, 30 + i * 9);
         u8g2.print(char_buffer);
       }
-      
+
       //Expo
       if (expo[i] > 0) {
         // Print "E" character
@@ -173,7 +177,7 @@ void Screen_0() {
         u8g2.setCursor(80, 30 + i * 9);
         u8g2.print(char_buffer);
       }
-      
+
       u8g2.setFont(u8g2_font_5x7_tr);
     }
 
@@ -792,6 +796,13 @@ void Menu_4 () {
     eepromPos++;
   }
 
+  // Save EPA data
+  for (int i = 0; i < CHANNELS - 2; i++) {
+
+    EEPROM.update(eepromPos, epa[i]);
+    eepromPos++;
+  }
+
   // Start of Save Data message screen ************************
   u8g2.firstPage();
   do {
@@ -1060,4 +1071,89 @@ void Menu_7 () {
     u8g2.print(chName_buffer);
 
   } while (u8g2.nextPage());
+
+
+}
+
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// Drawing EPA Setup screen display
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+void Menu_8 () {
+
+  // Set memory buffer for text strings
+  char chName_buffer[6];
+  char char_buffer[2];
+  char menu_buffer[18];
+
+  // Start EPA Setup screen ***********************************
+  u8g2.firstPage();
+  do {
+
+    readPots(); // Recall macro for stable ppm pulse
+
+    unsigned char temp_Counter = 0;
+
+    // Print EPA channels list
+    for (int i = 0; i < CHANNELS - 2; i++) {
+
+      // Print channel name items
+      strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[i])));
+      u8g2.setCursor(6, 20 + i * 10);
+      u8g2.print(chName_buffer);
+
+      if (menuSubActual - 1 == temp_Counter) {
+        if (epaSelection == temp_Counter) {
+
+          // Print selection cursor character ">" for channel
+          strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[14])));
+          u8g2.setCursor(0, 20 + i * 10);
+          u8g2.print(char_buffer);
+
+          // Print selection cursor character "[" for selected item
+          strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[8])));
+          u8g2.setCursor(27, 20 + i * 10);
+          u8g2.print(char_buffer);
+
+          // Print selection cursor character "]" for selected item
+          strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[9])));
+          u8g2.setCursor(60, 20 + i * 10);
+          u8g2.print(char_buffer);
+        }
+        else {
+
+          // Print selection cursor character ">" for channel
+          strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[14])));
+          u8g2.setCursor(0, 20 + i * 10);
+          u8g2.print(char_buffer);
+        }
+      }
+
+      // Print EPA value
+      u8g2.setCursor(40, 20 + i * 10);
+      u8g2.print(epa[i]);
+
+      temp_Counter++;
+    }
+
+    // Print "MODEL" text string
+    strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[18])));
+    u8g2.setCursor(0, 6);
+    u8g2.print(chName_buffer);
+
+    // Print number of actual model
+    u8g2.setCursor(28, 6);
+    u8g2.print(modelActual + 1);
+
+    // Drawing horizontal line under header
+    u8g2.drawHLine(0, 7, 84);
+
+    // Print "ENDPOINT ADJ" text string
+    strcpy_P(menu_buffer, (char*)pgm_read_word(&(menu_name[7])));
+    u8g2.setCursor(40, 6);
+    u8g2.print(menu_buffer);
+
+  } while (u8g2.nextPage());
+
+  // End EPA Setup screen ***********************************
 }
