@@ -32,7 +32,7 @@ void resetEeprom() {
     EEPROM.update(eepromPos++, 0x00);
 
     // Writing Sub Trim offset values for two channels in every model memory bank
-    for (int i = 0; i < CHANNELS - 2; i++) {
+    for (int i = 0; i < 2; i++) {
 
       // Writing Sub Trim stick values for every channels
 
@@ -42,7 +42,7 @@ void resetEeprom() {
 
     // Writing Dual Rates values for every channels in every model memory bank
     // Writing values will start after first address of start position
-    for (int i = 0; i < CHANNELS - 2; i++) {
+    for (int i = 0; i < 3; i++) {
 
       // Writing default LOW rates for channels
       EEPROM.update(eepromPos++, 75);
@@ -53,7 +53,7 @@ void resetEeprom() {
 
     // Writing Expo values for every channels in every model memory bank
     // Writing values will start after first address of start position
-    for (int i = 0; i < CHANNELS - 2; i++) {
+    for (int i = 0; i <2; i++) {
 
       // Writing default Expo. for channels
       EEPROM.update(eepromPos++, 0);
@@ -61,7 +61,7 @@ void resetEeprom() {
 
     // Writing EPA values for every channels in every model memory bank
     // Writing values will start after first address of start position
-    for (int i = 0; i < CHANNELS - 2; i++) {
+    for (int i = 0; i < 2; i++) {
 
       // Writing default Expo. for channels
       EEPROM.update(eepromPos++, 100);
@@ -99,24 +99,24 @@ unsigned char storedDataEeprom(unsigned char mod) {
   servoReverse = EEPROM.read(eepromPos++);
 
   // Read Sub Trim offset values for selected model
-  for (int i = 0; i < CHANNELS - 2; i++) {
+  for (int i = 0; i < 2; i++) {
     subTrim[i] = EEPROMReadInt(eepromPos);
     eepromPos += 2;
   }
 
   // Read Dual Rates values after first position
-  for (int i = 0; i < CHANNELS - 2; i++) {
+  for (int i = 0; i < 3; i++) {
     dual_rate_low[i] = EEPROM.read(eepromPos++);
     dual_rate_hi[i] = EEPROM.read(eepromPos++);
   }
 
   // Read Expo values after first position
-  for (int i = 0; i < CHANNELS - 2; i++) {
+  for (int i = 0; i < 2; i++) {
     expo[i] = EEPROM.read(eepromPos++);
   }
 
   // Read EPA values after first position
-  for (int i = 0; i < CHANNELS - 2; i++) {
+  for (int i = 0; i < 2; i++) {
     epa[i] = EEPROM.read(eepromPos++);
   }
   

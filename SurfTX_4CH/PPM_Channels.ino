@@ -31,35 +31,43 @@ void readPots() {
       if (pots[i] > calibration[i][1] + centerOffset) pots[i] = calibration[i][1] + centerOffset;
 
       int dRateVal = 0;
+      int dRateVal_bwd = 0;
 
       // Checking Dual Rates switch status,
       // if DR activated limitation of the preset percentage value will be applied
       if (dr_check == 1) {
         // LOW rates calculation
         dRateVal = 500 - (500 * dual_rate_low[i] / 100);
+
+        if (i == 1)
+          dRateVal_bwd = 500 - (500 * dual_rate_low[2] / 100);
       }
 
       if (dr_check == 2) {
         // HIGH rates calculation
         dRateVal = 500 - (500 * dual_rate_hi[i] / 100);
+
+        if (i == 1)
+          dRateVal_bwd = 500 - (500 * dual_rate_hi[2] / 100);
       }
 
       // Convert Analog Value to PPM Value
       if (pots[i]  < (potCenter - deadBand)) {
+        if (i == 1) dRateVal = dRateVal_bwd;
         tempPPM = map(pots[i], potCenter - gap, potCenter - deadBand, ppmMin + dRateVal, servoCenter);
 
         //expo.
         if (expo[i] > 0)
           tempPPM = calc_expo(tempPPM, ppmMin + dRateVal, expo[i]);
 
-        
+
       } else if (pots[i]  > (potCenter + deadBand)) {
         tempPPM = map(pots[i], potCenter + deadBand, potCenter + gap - 1, servoCenter, ppmMax - dRateVal);
 
         //expo.
         if (expo[i] > 0)
           tempPPM = calc_expo(tempPPM, ppmMax - dRateVal, expo[i]);
-        
+
       } else {
         tempPPM = servoCenter;
       }
@@ -76,9 +84,9 @@ void readPots() {
       short epaAmt = 500 - (500 * epa[i] / 100);
       short epaMin = ppmMin + epaAmt;
       short epaMax = ppmMax - epaAmt;
-      if(tempPPM < epaMin) tempPPM = epaMin;
-      if(tempPPM > epaMax) tempPPM = epaMax;
-      
+      if (tempPPM < epaMin) tempPPM = epaMin;
+      if (tempPPM > epaMax) tempPPM = epaMax;
+
       //Min Max Validation
       if (tempPPM < ppmMin) tempPPM = ppmMin;
       if (tempPPM > ppmMax) tempPPM = ppmMax;
