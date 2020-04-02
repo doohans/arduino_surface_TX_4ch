@@ -132,7 +132,7 @@ void Screen_0() {
 
       // Drawing cursor in every channel bar
       if (ppm[i] < servoCenter) {
-        u8g2.drawBox(11 + valBar-1, 24 + (i * 9), 30 - valBar + 2, 6);
+        u8g2.drawBox(11 + valBar - 1, 24 + (i * 9), 30 - valBar + 2, 6);
       } else if (ppm[i] > servoCenter) {
         u8g2.drawBox(11 + 30 + 1, 24 + (i * 9), valBar - 30 + 2, 6);
       }
@@ -140,19 +140,45 @@ void Screen_0() {
       //EPA
       u8g2.drawVLine(42 - (30 * epa[i]  / 100) - 2 , 25 + (i * 9), 2);
       u8g2.drawVLine(42 + (30 * epa[i]  / 100) + 1 , 25 + (i * 9), 2);
-      
+
       // Dual Rates switch status checking
       if (dr_check == 1) {
         // DR L
-        u8g2.drawVLine(42 - (30 * dual_rate_low[i] / 100) - 2 , 28 + (i * 9), 2);
-        u8g2.drawVLine(42 + (30 * dual_rate_low[i] / 100) + 1 , 28 + (i * 9), 2);
+
+        short drl_1 = dual_rate_low[i];
+        short drl_2 = dual_rate_low[i];
+
+        if (i == 1) {
+          if (bitRead(servoReverse, i) == 1) {
+            drl_2 = dual_rate_low[2];
+          } else {
+            drl_1 = dual_rate_low[2];
+          }
+        }
+
+        u8g2.drawVLine(42 - (30 * drl_1 / 100) - 2 , 28 + (i * 9), 2);
+        u8g2.drawVLine(42 + (30 * drl_2 / 100) + 1 , 28 + (i * 9), 2);
+
       }
 
       if (dr_check == 2) {
         // DR H
-        u8g2.drawVLine(42 - (30 * dual_rate_hi[i]  / 100) - 2 , 28 + (i * 9), 2);
-        u8g2.drawVLine(42 + (30 * dual_rate_hi[i]  / 100) + 1 , 28 + (i * 9), 2);
-      }     
+
+        short drh_1 = dual_rate_hi[i];
+        short drh_2 = dual_rate_hi[i];
+
+        if (i == 1) {
+          if (bitRead(servoReverse, i) == 1) {
+            drh_2 = dual_rate_hi[2];
+          } else {
+            drh_1 = dual_rate_hi[2];
+          }
+        }
+        
+        u8g2.drawVLine(42 - (30 * drh_1  / 100) - 2 , 28 + (i * 9), 2);
+        u8g2.drawVLine(42 + (30 * drh_2  / 100) + 1 , 28 + (i * 9), 2);
+
+      }
 
       u8g2.setFont(u8g2_font_4x6_tr);
       if (bitRead(servoReverse, i) == 1) {
@@ -508,47 +534,65 @@ void Menu_2 () {
     unsigned char counterTemp = 0;
 
     // Print Dual Rates channels list
-    for (int i = 0; i < CHANNELS - 2; i++) {
+    for (int i = 0; i < 3; i++) {
 
       // Print channel name list
-      strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[i])));
+      if (i > 1) {
+        strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[1])));
+      } else {
+        strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[i])));
+      }
+
       u8g2.setCursor(0, 20 + i * 8);
       u8g2.print(chName_buffer);
+
+
+      if (i == 1) {
+        strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[20])));
+        u8g2.setCursor(16, 20 + i * 8);
+        u8g2.print(char_buffer);
+      }
+
+      if (i == 2) {
+        strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[21])));
+        u8g2.setCursor(16, 20 + i * 8);
+        u8g2.print(char_buffer);
+      }
 
       if (menuSubActual - 1 == counterTemp) {
         if (drSelection == counterTemp) {
 
           // Print "[" character for item selected for LOW value
           strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[8])));
-          u8g2.setCursor(18, 20 + i * 8);
+          u8g2.setCursor(22, 20 + i * 8);
           u8g2.print(char_buffer);
 
           // Print "]" character for item selected for LOW value
           strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[9])));
-          u8g2.setCursor(47, 20 + i * 8);
+          u8g2.setCursor(51, 20 + i * 8);
           u8g2.print(char_buffer);
         }
         else {
 
           // Print selection cursor character ">" for LOW value
           strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[14])));
-          u8g2.setCursor(18, 20 + i * 8);
+          u8g2.setCursor(22, 20 + i * 8);
           u8g2.print(char_buffer);
         }
       }
 
       // Print "L" character for LOW value
       strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[6])));
-      u8g2.setCursor(23, 20 + i * 8);
+      u8g2.setCursor(27, 20 + i * 8);
       u8g2.print(char_buffer);
 
       // Print character "=");
       strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[10])));
-      u8g2.setCursor(28, 20 + i * 8);
+      u8g2.setCursor(32, 20 + i * 8);
       u8g2.print(char_buffer);
 
       // Print LOW value
-      u8g2.setCursor(33, 20 + i * 8);
+      u8g2.setCursor(37, 20 + i * 8);
       u8g2.print(dual_rate_low[i]);
 
       counterTemp++;

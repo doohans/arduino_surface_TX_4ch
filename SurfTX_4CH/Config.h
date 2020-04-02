@@ -110,15 +110,15 @@ unsigned char modelNameSelection = 0xFF;      // Default value for Model Name Se
 unsigned char drSelection = 0xFF;             // Default value for Dual Rates Selection
 unsigned char expSelection = 0xFF;            // Default value for Expo Selection
 unsigned char servoReverse;                   // Reading bit status
-unsigned char dual_rate_low[CHANNELS];        // Dual Rates LOW value array
-unsigned char dual_rate_hi[CHANNELS];         // Dual Rates HIGH value array
-unsigned char expo[CHANNELS];                 // Expo value array
+unsigned char dual_rate_low[3];               // Dual Rates LOW value array
+unsigned char dual_rate_hi[3];                // Dual Rates HIGH value array
+unsigned char expo[2];                        // Expo value array
 
 unsigned short int  deadBand = 30;            // Deadband center stick value (25 suggested value)
-short  subTrim[CHANNELS];                     // Sub Trim channel array
+short  subTrim[2];                            // Sub Trim channel array
 unsigned short int  subTrimSelection = 0xFF;  // Default value for Sub Trim
 
-unsigned char epa[CHANNELS];                  // EPA channel array
+unsigned char epa[2];                         // EPA channel array
 unsigned short int  epaSelection = 0xFF;      // Default value for EPA
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -271,6 +271,8 @@ const char character_16[] PROGMEM = "/";
 const char character_17[] PROGMEM = ".";
 const char character_18[] PROGMEM = "V";
 const char character_19[] PROGMEM = "E";
+const char character_20[] PROGMEM = "F";
+const char character_21[] PROGMEM = "B";
 
 const char* const one_char[] PROGMEM = {
   character_0,
@@ -292,7 +294,9 @@ const char* const one_char[] PROGMEM = {
   character_16,
   character_17,
   character_18,
-  character_19
+  character_19,
+  character_20,
+  character_21
 };
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

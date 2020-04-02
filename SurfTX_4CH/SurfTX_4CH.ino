@@ -504,7 +504,7 @@ void loop() {
         if (drSelection == 0xFF) {
 
           // Only first 2 channels
-          if (menuSubActual - 1 < (CHANNELS * 2) - 5) { // Two values * 2 channels
+          if (menuSubActual < 6) { // Two values * 3 
             menuSubActual++;
             if (screen == 0) {
               screen++;
