@@ -816,7 +816,7 @@ void Menu_4 () {
   EEPROM.update(eepromPos++, servoReverse);
 
   // Save Sub Trim center stick values for two channels in every model memory bank
-  for (int i = 0; i < CHANNELS - 2; i++) {
+  for (int i = 0; i < 2; i++) {
 
     // Save center stick values for every channels
     EEPROMUpdateInt(eepromPos, subTrim[i]);
@@ -824,7 +824,7 @@ void Menu_4 () {
   }
 
   // Save Dual Rates data
-  for (int i = 0; i < CHANNELS - 2; i++) {
+  for (int i = 0; i < 3; i++) {
 
     EEPROM.update(eepromPos, dual_rate_low[i]);
     eepromPos++;
@@ -834,14 +834,14 @@ void Menu_4 () {
   }
 
   // Save Exp data
-  for (int i = 0; i < CHANNELS - 2; i++) {
+  for (int i = 0; i < 2; i++) {
 
     EEPROM.update(eepromPos, expo[i]);
     eepromPos++;
   }
 
   // Save EPA data
-  for (int i = 0; i < CHANNELS - 2; i++) {
+  for (int i = 0; i < 2; i++) {
 
     EEPROM.update(eepromPos, epa[i]);
     eepromPos++;
@@ -907,7 +907,7 @@ void Menu_5 () {
     unsigned char temp_Counter = 0;
 
     // Print Sub Trim channels list
-    for (int i = 0; i < CHANNELS - 2; i++) {
+    for (int i = 0; i < 2; i++) {
 
       // Print channel name items
       strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[i])));
@@ -1051,7 +1051,7 @@ void Menu_7 () {
     readPots(); // Recall macro for stable ppm pulse
 
     // Print Expo channels list
-    for (int i = 0; i < CHANNELS - 2; i++) {
+    for (int i = 0; i < 2; i++) {
 
       // Print channel name list
       strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[i])));
@@ -1139,7 +1139,7 @@ void Menu_8 () {
     unsigned char temp_Counter = 0;
 
     // Print EPA channels list
-    for (int i = 0; i < CHANNELS - 2; i++) {
+    for (int i = 0; i < 2; i++) {
 
       // Print channel name items
       strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[i])));
