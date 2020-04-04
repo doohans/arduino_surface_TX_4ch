@@ -878,7 +878,7 @@ void Menu_4 () {
 
   // End of Save Data message screen **************************
 
-  delay(2000); // Screen message for 2sec
+  delay(1000); // Screen message for 2sec
 
   // Changing to default font type
   u8g2.setFont(u8g2_font_5x7_tr);

@@ -39,6 +39,7 @@ U8G2_PCD8544_84X48_1_4W_HW_SPI u8g2(U8G2_R0, /* cs=*/ 10, /* dc=*/ 9, /* reset=*
 #define potCenter 512                // Pot Center reference value
 //#define numBytesPerModel 32          // Maximum bytes for data storage per model
 #define numBytesPerModel 25          // Maximum bytes for data storage per model
+#define drMax 200                    // Maximum dual rate value
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Config pin assignment
@@ -63,6 +64,8 @@ U8G2_PCD8544_84X48_1_4W_HW_SPI u8g2(U8G2_R0, /* cs=*/ 10, /* dc=*/ 9, /* reset=*
 #define logo_width 84            // Pixel width of logo image
 #define logo_height 40           // Pixel height of logo image
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
 
 #define dualRateSwEepromAddr 1022
 #define actualModelEepromAddr 1023

@@ -706,7 +706,7 @@ void loop() {
           if ((drSelection % 2) == 0) {
 
             // Define Max for LOW Rates value
-            if (dual_rate_low[drSelection / 2] < 100) {
+            if (dual_rate_low[drSelection / 2] < drMax) {
 
               // Define step value
               dual_rate_low[drSelection / 2]++;
@@ -715,7 +715,7 @@ void loop() {
           else {
 
             // Define Max for HIGH Rates value
-            if (dual_rate_hi[drSelection / 2] < 100) {
+            if (dual_rate_hi[drSelection / 2] < drMax) {
 
               // Define step value
               dual_rate_hi[drSelection / 2]++;
