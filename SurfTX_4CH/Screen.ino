@@ -137,9 +137,25 @@ void Screen_0() {
         u8g2.drawBox(11 + 30 + 1, 24 + (i * 9), valBar - 30 + 2, 6);
       }
 
+      unsigned short subTrimVal = map(subTrim[i], 0, 500, 0, 30);
+
+      // Check Servo Reversing and applying Reverse value if necessary
+      if (bitRead(servoReverse, i) == 1) {
+        subTrimVal = -subTrimVal;
+      }
+
+      unsigned short minMaxValid = 0;
       //EPA
-      u8g2.drawVLine(42 - (30 * epa[i]  / 100) - 2 , 25 + (i * 9), 2);
-      u8g2.drawVLine(42 + (30 * epa[i]  / 100) + 1 , 25 + (i * 9), 2);
+      minMaxValid = 42 - (30 * epa[i]   / 100) - 2 + subTrimVal;
+      if (minMaxValid < 10) minMaxValid = 10;
+      if (minMaxValid > 73) minMaxValid = 73;
+      u8g2.drawVLine(minMaxValid, 25 + (i * 9), 2);
+
+
+      minMaxValid = 42 + (30 * epa[i]   / 100) + 1 + subTrimVal;
+      if (minMaxValid < 10) minMaxValid = 10;
+      if (minMaxValid > 73) minMaxValid = 73;
+      u8g2.drawVLine(minMaxValid, 25 + (i * 9), 2);
 
       // Dual Rates switch status checking
       if (dr_check == 1) {
@@ -156,8 +172,15 @@ void Screen_0() {
           }
         }
 
-        u8g2.drawVLine(42 - (30 * drl_1 / 100) - 2 , 28 + (i * 9), 2);
-        u8g2.drawVLine(42 + (30 * drl_2 / 100) + 1 , 28 + (i * 9), 2);
+        minMaxValid = 42 - (30 * drl_1 / 100) - 2 + subTrimVal;
+        if (minMaxValid < 10) minMaxValid = 10;
+        if (minMaxValid > 73) minMaxValid = 73;
+        u8g2.drawVLine(minMaxValid, 28 + (i * 9), 2);
+
+        minMaxValid = 42 + (30 * drl_2 / 100) + 1 + subTrimVal;
+        if (minMaxValid < 10) minMaxValid = 10;
+        if (minMaxValid > 73) minMaxValid = 73;
+        u8g2.drawVLine(minMaxValid, 28 + (i * 9), 2);
 
       }
 
@@ -174,11 +197,19 @@ void Screen_0() {
             drh_1 = dual_rate_hi[2];
           }
         }
-        
-        u8g2.drawVLine(42 - (30 * drh_1  / 100) - 2 , 28 + (i * 9), 2);
-        u8g2.drawVLine(42 + (30 * drh_2  / 100) + 1 , 28 + (i * 9), 2);
+
+        minMaxValid = 42 - (30 * drh_1 / 100) - 2 + subTrimVal;
+        if (minMaxValid < 10) minMaxValid = 10;
+        if (minMaxValid > 73) minMaxValid = 73;
+        u8g2.drawVLine(minMaxValid, 28 + (i * 9), 2);
+
+        minMaxValid = 42 + (30 * drh_2 / 100) + 1 + subTrimVal;
+        if (minMaxValid < 10) minMaxValid = 10;
+        if (minMaxValid > 73) minMaxValid = 73;
+        u8g2.drawVLine(minMaxValid, 28 + (i * 9), 2);
 
       }
+
 
       u8g2.setFont(u8g2_font_4x6_tr);
       if (bitRead(servoReverse, i) == 1) {
@@ -1044,7 +1075,7 @@ void Menu_7 () {
   char char_buffer[2];
   char menu_buffer[18];
 
-  // Start of Dual Rates setting screen ***********************************
+  // Start of Exp setting screen ***********************************
   u8g2.firstPage();
   do {
 
@@ -1084,7 +1115,7 @@ void Menu_7 () {
 
         if (expo[i] > 0) {
           for (int j = 36; j <= 84; j++) {
-            u8g2.drawPixel(j, map(calc_expo(map(j, 36, 84, servoCenter, ppmMax), ppmMax, expo[i]), servoCenter, ppmMax, 47, 9));
+            u8g2.drawPixel(j, map(calc_expo(servoCenter, map(j, 36, 84, servoCenter, ppmMax), ppmMax, expo[i]), servoCenter, ppmMax, 47, 9));
           }
         }
 

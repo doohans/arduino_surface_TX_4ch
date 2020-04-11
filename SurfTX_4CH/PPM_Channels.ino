@@ -51,41 +51,49 @@ void readPots() {
           dRateVal_bwd = 500 - (500 * dual_rate_hi[2] / 100);
       }
 
+      unsigned short trimServoCenter = servoCenter + subTrim[i];
+      unsigned short trimPpmMin = ppmMin + dRateVal + subTrim[i];
+      unsigned short trimPpmMax = ppmMax - dRateVal + subTrim[i];
+
       // Convert Analog Value to PPM Value
       if (pots[i]  < (potCenter - deadBand)) {
-        if (i == 1) dRateVal = dRateVal_bwd;
-        tempPPM = map(pots[i], potCenter - gap, potCenter - deadBand, ppmMin + dRateVal, servoCenter);
+        //if (i == 1) dRateVal = dRateVal_bwd;
+        if (i == 1) trimPpmMin = ppmMin + dRateVal_bwd + subTrim[i];
+        tempPPM = map(pots[i], potCenter - gap, potCenter - deadBand, trimPpmMin, trimServoCenter);
 
         //expo.
         if (expo[i] > 0)
-          tempPPM = calc_expo(tempPPM, ppmMin + dRateVal, expo[i]);
+          tempPPM = calc_expo(trimServoCenter, tempPPM, trimPpmMin, expo[i]);
 
 
       } else if (pots[i]  > (potCenter + deadBand)) {
-        tempPPM = map(pots[i], potCenter + deadBand, potCenter + gap - 1, servoCenter, ppmMax - dRateVal);
+        tempPPM = map(pots[i], potCenter + deadBand, potCenter + gap - 1, trimServoCenter, trimPpmMax);
 
         //expo.
         if (expo[i] > 0)
-          tempPPM = calc_expo(tempPPM, ppmMax - dRateVal, expo[i]);
+          tempPPM = calc_expo(trimServoCenter, tempPPM, trimPpmMax, expo[i]);
 
       } else {
-        tempPPM = servoCenter;
+        tempPPM = trimServoCenter;
       }
+
+
+      //apply subtrim value
+      //tempPPM += subTrim[i];
+
+      //EPA check
+      short epaAmt = 500 - (500 * epa[i] / 100);
+      short epaMin = ppmMin + epaAmt + subTrim[i];
+      short epaMax = ppmMax - epaAmt + subTrim[i];
+      if (tempPPM < epaMin) tempPPM = epaMin;
+      if (tempPPM > epaMax) tempPPM = epaMax;
+
 
       // Check Servo Reversing and applying Reverse value if necessary
       if (bitRead(servoReverse, i) == 1) {
         tempPPM = ppmMax - tempPPM + ppmMin;
       }
 
-      //apply subtrim value
-      tempPPM += subTrim[i];
-
-      //EPA check
-      short epaAmt = 500 - (500 * epa[i] / 100);
-      short epaMin = ppmMin + epaAmt;
-      short epaMax = ppmMax - epaAmt;
-      if (tempPPM < epaMin) tempPPM = epaMin;
-      if (tempPPM > epaMax) tempPPM = epaMax;
 
       //Min Max Validation
       if (tempPPM < ppmMin) tempPPM = ppmMin;
