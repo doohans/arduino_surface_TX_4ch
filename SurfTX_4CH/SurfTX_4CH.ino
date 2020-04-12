@@ -110,7 +110,7 @@ void setup() {
   // LCD config with U8G2 library display init (mandatory)
   u8g2.begin();
 
-  
+
   if (VCC == 5)
     u8g2.setContrast(119);
 
@@ -401,7 +401,8 @@ void loop() {
       screen++;
       menuActual = menuSubActual;
       menuSubActual = 1;
-      menuSubModel = 0;
+      menuSubModel = modelActual;
+      modelPage = (menuSubModel) / 10;
     }
     else {
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -441,7 +442,6 @@ void loop() {
         storedDataEeprom(modelActual);
 
         screen = 0;
-        menuSubModel = 1;
         menuActual = 0;
 
         delay(1);
@@ -504,7 +504,7 @@ void loop() {
         if (drSelection == 0xFF) {
 
           // Only first 2 channels
-          if (menuSubActual < 6) { // Two values * 3 
+          if (menuSubActual < 6) { // Two values * 3
             menuSubActual++;
             if (screen == 0) {
               screen++;

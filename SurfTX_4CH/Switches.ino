@@ -14,9 +14,8 @@ void readSwitches() {
       screen = 0;
       menuSubActual = 1;
       menuActual = 0;
-      menuSubModel = 0;
       menuPage=0;
-      modelPage=0;
+
       return;
     }
 
