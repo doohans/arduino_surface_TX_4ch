@@ -397,6 +397,7 @@ void loop() {
 
   // If pressed buttonSelect/Enter
   if (readKeys() == 2) {
+    delay(50);
     if (screen < 2) {
       screen++;
       menuActual = menuSubActual;
@@ -493,6 +494,7 @@ void loop() {
   }
 
   if (readKeys() == 3) {
+    delay(50);
     switch (menuActual) {
 
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -682,6 +684,7 @@ void loop() {
   }
 
   if (readKeys() == 1) {
+    delay(50);
     switch (menuActual) {
 
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
