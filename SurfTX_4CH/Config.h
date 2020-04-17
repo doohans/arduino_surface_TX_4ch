@@ -74,10 +74,10 @@ U8G2_PCD8544_84X48_1_4W_HW_SPI u8g2(U8G2_R0, /* cs=*/ 10, /* dc=*/ 9, /* reset=*
 
 #if F_CPU == 16000000L
 #define OCR_MUL 2
-#define KEY_DELAY 25
+#define KEY_DELAY 150
 #else
 #define OCR_MUL 1
-#define KEY_DELAY 10
+#define KEY_DELAY 130
 #endif
 
 #define VCC 5       // arduino VCC 5(5v) or 33(3.3v)

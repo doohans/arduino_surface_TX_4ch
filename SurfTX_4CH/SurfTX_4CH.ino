@@ -335,7 +335,7 @@ void setup() {
 
 void loop() {
   // Start Calibration screen if button Enter/Select is pressed on power on ***********************
-  if (readKeys() == 2 && statusCalib == 1) {
+  if (statusCalib == 1 && readKeys() == 2) {
 
     Calibration();    // Recall calibration procedure
   }
@@ -395,9 +395,11 @@ void loop() {
     }
   }
 
+
+  unsigned char pressedKey = readKeys();
+
   // If pressed buttonSelect/Enter
-  if (readKeys() == 2) {
-    delay(50);
+  if (pressedKey == 2) {
     if (screen < 2) {
       screen++;
       menuActual = menuSubActual;
@@ -493,8 +495,7 @@ void loop() {
     }
   }
 
-  if (readKeys() == 3) {
-    delay(50);
+  if (pressedKey == 3) {
     switch (menuActual) {
 
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -683,8 +684,7 @@ void loop() {
     }
   }
 
-  if (readKeys() == 1) {
-    delay(50);
+  if (pressedKey == 1) {
     switch (menuActual) {
 
       //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -885,4 +885,10 @@ void loop() {
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     }
   }
+
+  
+  if (pressedKey != 0) {
+    delay(KEY_DELAY);
+  }
+  
 }
