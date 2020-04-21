@@ -116,7 +116,7 @@ void Screen_0() {
     u8g2.print(char_buffer);
 
     //Drawing vertical middle/center separation line
-    u8g2.drawVLine(42, 22, 20);
+    u8g2.drawVLine(41, 22, 20);
 
     // Drawing only first 2 channels
     for (int i = 0; i < 2; i++) {
@@ -125,36 +125,37 @@ void Screen_0() {
       unsigned int valBar;
 
       // Value bars subdivision (ppm value / 55)
-      valBar = map(ppm[i], ppmMin, ppmMax, 0 , 60);
+      valBar = map(ppm[i], ppmMin, ppmMax, 0 , 66);
 
       // Draw boxes/frames for every channel
-      u8g2.drawFrame(10, 24 + (i * 9), 64, 7);
+      u8g2.drawFrame(8, 24 + (i * 9), 67, 7);
 
       // Drawing cursor in every channel bar
-      if (ppm[i] < servoCenter) {
-        u8g2.drawBox(11 + valBar - 1, 24 + (i * 9), 30 - valBar + 2, 6);
-      } else if (ppm[i] > servoCenter) {
-        u8g2.drawBox(11 + 30 + 1, 24 + (i * 9), valBar - 30 + 2, 6);
+      if (valBar < 33) {
+        u8g2.drawBox(9 + valBar, 24 + (i * 9), 33 - valBar, 6);
+      } else if (valBar > 33) {
+        u8g2.drawBox(42, 24 + (i * 9), valBar - 33, 6);
       }
 
-      unsigned short subTrimVal = map(subTrim[i], 0, 500, 0, 30);
+      unsigned short subTrimVal = map(subTrim[i], 0, 500, 0, 33);
 
       // Check Servo Reversing and applying Reverse value if necessary
       if (bitRead(servoReverse, i) == 1) {
         subTrimVal = -subTrimVal;
       }
 
+
       unsigned short minMaxValid = 0;
       //EPA
-      minMaxValid = 42 - (30 * epa[i]   / 100) - 2 + subTrimVal;
-      if (minMaxValid < 10) minMaxValid = 10;
-      if (minMaxValid > 73) minMaxValid = 73;
+      minMaxValid = 41 - (33 * epa[i]   / 100) + subTrimVal;
+      if (minMaxValid < 8) minMaxValid = 8;
+      if (minMaxValid > 74) minMaxValid = 74;
       u8g2.drawVLine(minMaxValid, 25 + (i * 9), 2);
 
 
-      minMaxValid = 42 + (30 * epa[i]   / 100) + 1 + subTrimVal;
-      if (minMaxValid < 10) minMaxValid = 10;
-      if (minMaxValid > 73) minMaxValid = 73;
+      minMaxValid = 41 + (33 * epa[i]   / 100) + subTrimVal;
+      if (minMaxValid < 8) minMaxValid = 8;
+      if (minMaxValid > 74) minMaxValid = 74;
       u8g2.drawVLine(minMaxValid, 25 + (i * 9), 2);
 
       // Dual Rates switch status checking
@@ -172,14 +173,14 @@ void Screen_0() {
           }
         }
 
-        minMaxValid = 42 - (30 * drl_1 / 100) - 2 + subTrimVal;
-        if (minMaxValid < 10) minMaxValid = 10;
-        if (minMaxValid > 73) minMaxValid = 73;
+        minMaxValid = 41 - (33 * drl_1 / 100) + subTrimVal;
+        if (minMaxValid < 8) minMaxValid = 8;
+        if (minMaxValid > 74) minMaxValid = 74;
         u8g2.drawVLine(minMaxValid, 28 + (i * 9), 2);
 
-        minMaxValid = 42 + (30 * drl_2 / 100) + 1 + subTrimVal;
-        if (minMaxValid < 10) minMaxValid = 10;
-        if (minMaxValid > 73) minMaxValid = 73;
+        minMaxValid = 41 + (33 * drl_2 / 100) + subTrimVal;
+        if (minMaxValid < 8) minMaxValid = 8;
+        if (minMaxValid > 74) minMaxValid = 74;
         u8g2.drawVLine(minMaxValid, 28 + (i * 9), 2);
 
       }
@@ -198,14 +199,14 @@ void Screen_0() {
           }
         }
 
-        minMaxValid = 42 - (30 * drh_1 / 100) - 2 + subTrimVal;
-        if (minMaxValid < 10) minMaxValid = 10;
-        if (minMaxValid > 73) minMaxValid = 73;
+        minMaxValid = 41 - (33 * drh_1 / 100) + subTrimVal;
+        if (minMaxValid < 8) minMaxValid = 8;
+        if (minMaxValid > 74) minMaxValid = 74;
         u8g2.drawVLine(minMaxValid, 28 + (i * 9), 2);
 
-        minMaxValid = 42 + (30 * drh_2 / 100) + 1 + subTrimVal;
-        if (minMaxValid < 10) minMaxValid = 10;
-        if (minMaxValid > 73) minMaxValid = 73;
+        minMaxValid = 41 + (33 * drh_2 / 100) + subTrimVal;
+        if (minMaxValid < 8) minMaxValid = 8;
+        if (minMaxValid > 74) minMaxValid = 74;
         u8g2.drawVLine(minMaxValid, 28 + (i * 9), 2);
 
       }
