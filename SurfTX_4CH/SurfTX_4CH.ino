@@ -460,9 +460,10 @@ void loop() {
           subTrimSelection = menuSubActual - 1;
         }
       }
+      
       if (menuActual == 6) {
 
-        // Selection value for Dual Rates
+        // Selection value for Set Model Name
         if (modelNameSelection != 0xFF) {
           modelNameSelection = 0xFF;
         }

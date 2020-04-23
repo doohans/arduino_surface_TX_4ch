@@ -16,6 +16,12 @@ void readSwitches() {
       menuActual = 0;
       menuPage=0;
 
+      drSelection = 0xFF;
+      subTrimSelection = 0xFF;
+      modelNameSelection = 0xFF;
+      expSelection = 0xFF;
+      epaSelection = 0xFF;
+      
       return;
     }
 
