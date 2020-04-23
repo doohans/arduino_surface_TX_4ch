@@ -40,9 +40,11 @@ This has Two steps Calibrations. first is Range Calibaration. second one is cent
    1) Toggle Dual Rate state.
    2) Return main screen when this button is pressed in any menu screens.
 
+## Screens
+
+![Main Screen](https://github.com/doohans/arduino_surface_TX_4ch/blob/master/Images/main_screen.jpeg)
 
 ## EEPROM Memory Map
 
 https://docs.google.com/spreadsheets/d/1R2shopYCNBNx50pZLSfzXPBwvNPSjA0mwf481hEYQtA/edit#gid=0
-
 
