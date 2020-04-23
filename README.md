@@ -29,6 +29,18 @@ And many of codes modified for surface vehicle.
 
 This needs First Startup Procedures (almost same with Gabapentin's https://github.com/Gabapentin/Arduino-RC-6CH-Radio-control/wiki/5.-First-Startup-Procedures)
 
+This has Two steps Calibrations. first is Range Calibaration. second one is center position Calibration. you need to press UP button to finish every step. 
+
+## Buttons
+
+1. UP (LEFT)
+2. SELECT (MENU)
+3. DOWN (RIGHT)
+4. D/R (EXIT)  
+   1) Toggle Dual Rate state.
+   2) Return main screen when this button is pressed in any menu screens.
+
+
 ## EEPROM Memory Map
 
 https://docs.google.com/spreadsheets/d/1R2shopYCNBNx50pZLSfzXPBwvNPSjA0mwf481hEYQtA/edit#gid=0
