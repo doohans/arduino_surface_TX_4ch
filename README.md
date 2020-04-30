@@ -41,7 +41,8 @@ This has Two steps Calibrations. first is Range Calibaration. second one is cent
    2) Return main screen when this button is pressed in any menu screens.
 
 ## Screens
-surfTX uses Nokia 5110(84x48) screen. (It will be changed with 128x64 resolution screen.)
+surfTX uses Nokia 5110(84x48) screen. (It will be changed with 128x64 resolution screen soon.)
+
 ![Screen01](https://github.com/doohans/arduino_surface_TX_4ch/blob/master/Images/screen01.jpg)
 ![Screen02](https://github.com/doohans/arduino_surface_TX_4ch/blob/master/Images/screen02.jpg)
 ![Screen03](https://github.com/doohans/arduino_surface_TX_4ch/blob/master/Images/screen03.jpg)
