@@ -42,7 +42,16 @@ This has Two steps Calibrations. first is Range Calibaration. second one is cent
 
 ## Screens
 surfTX uses Nokia 5110(84x48) screen. (It will be changed with 128x64 resolution screen.)
-![Main Screen](https://github.com/doohans/arduino_surface_TX_4ch/blob/master/Images/main_screen.jpeg)
+![Screen01](https://github.com/doohans/arduino_surface_TX_4ch/blob/master/Images/screen01.jpg)
+![Screen02](https://github.com/doohans/arduino_surface_TX_4ch/blob/master/Images/screen02.jpg)
+![Screen03](https://github.com/doohans/arduino_surface_TX_4ch/blob/master/Images/screen03.jpg)
+![Screen04](https://github.com/doohans/arduino_surface_TX_4ch/blob/master/Images/screen04.jpg)
+![Screen05](https://github.com/doohans/arduino_surface_TX_4ch/blob/master/Images/screen05.jpg)
+![Screen06](https://github.com/doohans/arduino_surface_TX_4ch/blob/master/Images/screen06.jpg)
+![Screen07](https://github.com/doohans/arduino_surface_TX_4ch/blob/master/Images/screen07.jpg)
+![Screen08](https://github.com/doohans/arduino_surface_TX_4ch/blob/master/Images/screen08.jpg)
+![Screen09](https://github.com/doohans/arduino_surface_TX_4ch/blob/master/Images/screen09.jpg)
+![Screen10](https://github.com/doohans/arduino_surface_TX_4ch/blob/master/Images/screen10.jpg)
 
 ## EEPROM Memory Map
 
