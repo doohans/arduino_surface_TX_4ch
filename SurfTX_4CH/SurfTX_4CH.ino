@@ -110,9 +110,9 @@ void setup() {
   // LCD config with U8G2 library display init (mandatory)
   u8g2.begin();
 
-
-  if (VCC == 5)
-    u8g2.setContrast(119);
+  u8g2.setFlipMode(1);
+    
+  u8g2.setContrast(10);
 
   // Set font type
   u8g2.setFont(u8g2_font_5x7_tr);
@@ -138,7 +138,7 @@ void setup() {
     u8g2.print(msg_buffer);
 
     // Print logo XBM image
-    u8g2.drawXBMP(0, 8, logo_width, logo_height, logo);
+    u8g2.drawXBMP(0, 14, logo_width, logo_height, logo);
 
   } while (u8g2.nextPage());
 
@@ -328,7 +328,7 @@ void setup() {
   u8g2.setFont(u8g2_font_5x7_tr);
 
   // for boot logo duration
-  delay(400);
+  delay(800);
 }
 
 // End of Setup +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -13,6 +13,8 @@ void Screen_0() {
 
     readPots(); // Recall macro again for stable ppm pulse
 
+    u8g2.setFont(u8g2_font_5x7_tr);
+
     // Print "MODEL" text string
     strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[18])));
     u8g2.setCursor(0, 6);
@@ -22,48 +24,48 @@ void Screen_0() {
     u8g2.setCursor(28, 6);
     u8g2.print(modelActual + 1);
 
-    u8g2.setFont(u8g2_font_4x6_tr);
+    //u8g2.setFont(u8g2_font_4x6_tr);
 
     if (dr_check > 0) {
 
       // Print Dual Rates status only if active (DR)
       strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[10])));
-      u8g2.setCursor(42, 6);
+      u8g2.setCursor(58, 6);
       u8g2.print(chName_buffer);
 
       // Dual Rates switch status checking
       if (dr_check == 1) {
         // Print "L" character
         strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[6])));
-        u8g2.setCursor(51, 6);
+        u8g2.setCursor(71, 6);
         u8g2.print(char_buffer);
       }
       if (dr_check == 2) {
         // Print "H" character
         strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[5])));
-        u8g2.setCursor(51, 6);
+        u8g2.setCursor(71, 6);
         u8g2.print(char_buffer);
       }
 
     }
 
     // Print Voltage
-    u8g2.setCursor(58, 6);
+    u8g2.setCursor(96, 6);
     u8g2.print(batt_volt / 10);
 
     strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[17])));
-    u8g2.setCursor(61, 6);
+    u8g2.setCursor(100, 6);
     u8g2.print(char_buffer);
 
-    u8g2.setCursor(64, 6);
+    u8g2.setCursor(104, 6);
     u8g2.print(batt_volt % 10);
 
     strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[18])));
-    u8g2.setCursor(68, 6);
+    u8g2.setCursor(109, 6);
     u8g2.print(char_buffer);
 
     // Sub Trim
-    u8g2.drawFrame(50, 8, 7, 13);             // Trim Box
+    u8g2.drawFrame(90, 11, 8, 18);             // Trim Box
     //u8g2.drawBox(50, 7, 7, 14);
     for (int i = 0; i < 2; i++) {
       // Print Sub Trim value
@@ -72,51 +74,51 @@ void Screen_0() {
       } else {
         strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[3])));
       }
-      u8g2.setCursor(52, 14 + i * 6);
+      u8g2.setCursor(92, 19 + i * 8);
       u8g2.print(char_buffer);
 
       strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[i])));
-      u8g2.setCursor(59, 14 + i * 6);
+      u8g2.setCursor(100, 19 + i * 8);
       u8g2.print(char_buffer);
 
-      u8g2.setCursor(65, 14 + i * 6);
+      u8g2.setCursor(108, 19 + i * 8);
       u8g2.print(subTrim[i]);
     }
 
-
-    u8g2.setFont(u8g2_font_5x7_tr);
-
     // Battery simbol contruction
-    u8g2.drawFrame(72, 0, 11, 7);             // Battery box
-    u8g2.drawBox(72, 1, perc_batt, 5);        // level bar
-    u8g2.drawBox(82, 2, 2, 3);                // Battery nipple plus pole
+    u8g2.drawFrame(116, 0, 11, 7);             // Battery box
+    u8g2.drawBox(116, 1, perc_batt, 5);        // level bar
+    u8g2.drawBox(126, 2, 2, 3);                // Battery nipple plus pole
+
+    u8g2.setFont(u8g2_font_8x13B_tr);
 
     // Print ">" character
     strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[14])));
-    u8g2.setCursor(0, 17);
+    u8g2.setCursor(0, 26);
     u8g2.print(char_buffer);
 
     //model Name
     for (int i = 0; i < 5; i++) {
-      u8g2.setCursor(8 + i * 7, 17);
+      u8g2.setCursor(12 + i * 14, 26);
       u8g2.print(modelName[i]);
     }
 
-
+    u8g2.setFont(u8g2_font_5x7_tr);
+    
     // Print first 2 channels reference with input pots order
 
     // Print "S" character
     strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[0])));
-    u8g2.setCursor(0, 31);
+    u8g2.setCursor(5, 40);
     u8g2.print(char_buffer);
 
     // Print "T" character
     strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[1])));
-    u8g2.setCursor(0, 40);
+    u8g2.setCursor(5, 52);
     u8g2.print(char_buffer);
 
     //Drawing vertical middle/center separation line
-    u8g2.drawVLine(41, 22, 20);
+    u8g2.drawVLine(63, 31, 24);
 
     // Drawing only first 2 channels
     for (int i = 0; i < 2; i++) {
@@ -125,19 +127,19 @@ void Screen_0() {
       unsigned int valBar;
 
       // Value bars subdivision (ppm value / 55)
-      valBar = map(ppm[i], ppmMin, ppmMax, 0 , 66);
+      valBar = map(ppm[i], ppmMin, ppmMax, 0 , 100);
 
       // Draw boxes/frames for every channel
-      u8g2.drawFrame(8, 24 + (i * 9), 67, 7);
+      u8g2.drawFrame(13, 33 + (i * 12), 101, 8);
 
       // Drawing cursor in every channel bar
-      if (valBar < 33) {
-        u8g2.drawBox(9 + valBar, 24 + (i * 9), 33 - valBar, 6);
-      } else if (valBar > 33) {
-        u8g2.drawBox(42, 24 + (i * 9), valBar - 33, 6);
+      if (valBar < 50) {
+        u8g2.drawBox(14 + valBar, 33 + (i * 12), 50 - valBar, 8);
+      } else if (valBar > 50) {
+        u8g2.drawBox(64, 33 + (i * 12), valBar - 50, 8);
       }
 
-      unsigned short subTrimVal = map(subTrim[i], 0, 500, 0, 33);
+      unsigned short subTrimVal = map(subTrim[i], 0, 500, 0, 50);
 
       // Check Servo Reversing and applying Reverse value if necessary
       if (bitRead(servoReverse, i) == 1) {
@@ -147,16 +149,16 @@ void Screen_0() {
 
       unsigned short minMaxValid = 0;
       //EPA
-      minMaxValid = 41 - (33 * epa[i]   / 100) + subTrimVal;
-      if (minMaxValid < 8) minMaxValid = 8;
-      if (minMaxValid > 74) minMaxValid = 74;
-      u8g2.drawVLine(minMaxValid, 25 + (i * 9), 2);
+      minMaxValid = 63 - (50 * epa[i]   / 100) + subTrimVal;
+      if (minMaxValid < 13) minMaxValid = 13;
+      if (minMaxValid > 113) minMaxValid = 113;
+      u8g2.drawVLine(minMaxValid, 34 + (i * 12), 2);
 
 
-      minMaxValid = 41 + (33 * epa[i]   / 100) + subTrimVal;
-      if (minMaxValid < 8) minMaxValid = 8;
-      if (minMaxValid > 74) minMaxValid = 74;
-      u8g2.drawVLine(minMaxValid, 25 + (i * 9), 2);
+      minMaxValid = 63 + (50 * epa[i]   / 100) + subTrimVal;
+      if (minMaxValid < 13) minMaxValid = 13;
+      if (minMaxValid > 113) minMaxValid = 113;
+      u8g2.drawVLine(minMaxValid, 34 + (i * 12), 2);
 
       // Dual Rates switch status checking
       if (dr_check == 1) {
@@ -173,15 +175,15 @@ void Screen_0() {
           }
         }
 
-        minMaxValid = 41 - (33 * drl_1 / 100) + subTrimVal;
-        if (minMaxValid < 8) minMaxValid = 8;
-        if (minMaxValid > 74) minMaxValid = 74;
-        u8g2.drawVLine(minMaxValid, 28 + (i * 9), 2);
+        minMaxValid = 63 - (50 * drl_1 / 100) + subTrimVal;
+        if (minMaxValid < 13) minMaxValid = 13;
+        if (minMaxValid > 113) minMaxValid = 113;
+        u8g2.drawVLine(minMaxValid, 38 + (i * 12), 2);
 
-        minMaxValid = 41 + (33 * drl_2 / 100) + subTrimVal;
-        if (minMaxValid < 8) minMaxValid = 8;
-        if (minMaxValid > 74) minMaxValid = 74;
-        u8g2.drawVLine(minMaxValid, 28 + (i * 9), 2);
+        minMaxValid = 63 + (50 * drl_2 / 100) + subTrimVal;
+        if (minMaxValid < 13) minMaxValid = 13;
+        if (minMaxValid > 113) minMaxValid = 113;
+        u8g2.drawVLine(minMaxValid, 38 + (i * 12), 2);
 
       }
 
@@ -199,32 +201,32 @@ void Screen_0() {
           }
         }
 
-        minMaxValid = 41 - (33 * drh_1 / 100) + subTrimVal;
-        if (minMaxValid < 8) minMaxValid = 8;
-        if (minMaxValid > 74) minMaxValid = 74;
-        u8g2.drawVLine(minMaxValid, 28 + (i * 9), 2);
+        minMaxValid = 63 - (50 * drh_1 / 100) + subTrimVal;
+        if (minMaxValid < 13) minMaxValid = 13;
+        if (minMaxValid > 113) minMaxValid = 113;
+        u8g2.drawVLine(minMaxValid, 38 + (i * 12), 2);
 
-        minMaxValid = 41 + (33 * drh_2 / 100) + subTrimVal;
-        if (minMaxValid < 8) minMaxValid = 8;
-        if (minMaxValid > 74) minMaxValid = 74;
-        u8g2.drawVLine(minMaxValid, 28 + (i * 9), 2);
+        minMaxValid = 63 + (50 * drh_2 / 100) + subTrimVal;
+        if (minMaxValid < 13) minMaxValid = 13;
+        if (minMaxValid > 113) minMaxValid = 113;
+        u8g2.drawVLine(minMaxValid, 38 + (i * 12), 2);
 
       }
 
 
-      u8g2.setFont(u8g2_font_4x6_tr);
+
       if (bitRead(servoReverse, i) == 1) {
 
         // Print "R"everse channel status for every channel
         strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[3])));
-        u8g2.setCursor(76, 30 + i * 9);
+        u8g2.setCursor(117, 40 + i * 12);
         u8g2.print(char_buffer);
       }
       else {
 
         // Print "N"ormal channel status for every channel
         strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[4])));
-        u8g2.setCursor(76, 30 + i * 9);
+        u8g2.setCursor(117, 40 + i * 12);
         u8g2.print(char_buffer);
       }
 
@@ -232,35 +234,33 @@ void Screen_0() {
       if (expo[i] > 0) {
         // Print "E" character
         strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[19])));
-        u8g2.setCursor(80, 30 + i * 9);
+        u8g2.setCursor(123, 40 + i * 12);
         u8g2.print(char_buffer);
       }
 
-      u8g2.setFont(u8g2_font_5x7_tr);
     }
 
 
-    u8g2.setFont(u8g2_font_4x6_tr);
     //If switch SWA print ON/OFF state
     if (bitRead(servoReverse, 2) == 1) {
 
       // Print "SWA" text
       strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[6])));
-      u8g2.setCursor(0, 48);
+      u8g2.setCursor(0, 64);
       u8g2.print(chName_buffer);
 
       if (read_adc(6) < 500) {
 
         // Print SWA "ON" text
         strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[15])));
-        u8g2.setCursor(17, 48);
+        u8g2.setCursor(17, 64);
         u8g2.print(chName_buffer);
       }
       else {
 
         // Print SWA "OFF" text
         strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[16])));
-        u8g2.setCursor(17, 48);
+        u8g2.setCursor(17, 64);
         u8g2.print(chName_buffer);
       }
     }
@@ -272,11 +272,11 @@ void Screen_0() {
 
       // Print "VRA" text
       strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[11])));
-      u8g2.setCursor(0, 48);
+      u8g2.setCursor(0, 64);
       u8g2.print(chName_buffer);
 
       // Print VRA value
-      u8g2.setCursor(17, 48);
+      u8g2.setCursor(17, 64);
       u8g2.print(VRA);
     }
 
@@ -285,21 +285,21 @@ void Screen_0() {
 
       // Print "SWB" text
       strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[7])));
-      u8g2.setCursor(54, 48);
+      u8g2.setCursor(94, 64);
       u8g2.print(chName_buffer);
 
       if (digitalRead(swB) == 0) {
 
         // Print SWB "ON" text
         strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[15])));
-        u8g2.setCursor(72, 48);
+        u8g2.setCursor(112, 64);
         u8g2.print(chName_buffer);
       }
       else {
 
         // Print SWB "OFF" text
         strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[16])));
-        u8g2.setCursor(72, 48);
+        u8g2.setCursor(112, 64);
         u8g2.print(chName_buffer);
       }
     }
@@ -311,14 +311,14 @@ void Screen_0() {
 
       // Print "VRB" text
       strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[12])));
-      u8g2.setCursor(54, 48);
+      u8g2.setCursor(94, 64);
       u8g2.print(chName_buffer);
 
       // Print VRB value
-      u8g2.setCursor(72, 48);
+      u8g2.setCursor(112, 64);
       u8g2.print(VRB);
     }
-    u8g2.setFont(u8g2_font_5x7_tr);
+
   } while (u8g2.nextPage());
 
   // End of main screen display informations "0" **************************
