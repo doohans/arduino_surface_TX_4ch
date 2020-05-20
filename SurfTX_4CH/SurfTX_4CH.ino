@@ -114,6 +114,8 @@ void setup() {
     
   u8g2.setContrast(10);
 
+  
+  
   // Set font type
   u8g2.setFont(u8g2_font_5x7_tr);
 

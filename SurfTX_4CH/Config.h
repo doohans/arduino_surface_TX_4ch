@@ -232,6 +232,8 @@ const char chName_16[] PROGMEM = "OFF";
 const char chName_17[] PROGMEM = "PPM";
 const char chName_18[] PROGMEM = "MODEL";
 const char chName_19[] PROGMEM = "EXP";
+const char chName_20[] PROGMEM = "FWD";
+const char chName_21[] PROGMEM = "BWD";
 
 const char* const channel_name[] PROGMEM = {
   chName_0,
@@ -253,7 +255,9 @@ const char* const channel_name[] PROGMEM = {
   chName_16,
   chName_17,
   chName_18,
-  chName_19
+  chName_19,
+  chName_20,
+  chName_21
 };
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -277,10 +281,9 @@ const char character_14[] PROGMEM = ">";
 const char character_15[] PROGMEM = "?";
 const char character_16[] PROGMEM = "/";
 const char character_17[] PROGMEM = ".";
-const char character_18[] PROGMEM = "V";
+const char character_18[] PROGMEM = "v";
 const char character_19[] PROGMEM = "E";
-const char character_20[] PROGMEM = "F";
-const char character_21[] PROGMEM = "B";
+const char character_20[] PROGMEM = "%";
 
 const char* const one_char[] PROGMEM = {
   character_0,
@@ -303,8 +306,7 @@ const char* const one_char[] PROGMEM = {
   character_17,
   character_18,
   character_19,
-  character_20,
-  character_21
+  character_20
 };
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
