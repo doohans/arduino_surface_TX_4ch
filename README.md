@@ -3,7 +3,7 @@
 ## Overview
 
 
-![surfTX Logo](https://github.com/doohans/arduino_surface_TX_4ch/blob/master/Images/logo.png)
+![surfTX Logo](https://github.com/doohans/arduino_surface_TX_4ch/blob/master/Images/logo2.png)
 
 This project is another fork from https://github.com/Gabapentin/Arduino-RC-6CH-Radio-control
 
