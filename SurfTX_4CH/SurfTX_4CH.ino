@@ -113,11 +113,11 @@ void setup() {
   u8g2.setFlipMode(1);
     
   u8g2.setContrast(10);
-
   
-  
-  // Set font type
-  u8g2.setFont(u8g2_font_5x7_tr);
+  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  // Set default font type used for all display sessions (mandatory)
+  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  u8g2.setFont(u8g2_font_6x10_tr);
 
   // Set memory buffer for text strings
   char msg_buffer[21];
@@ -131,12 +131,12 @@ void setup() {
     // confirm msg
     // Print "V" text string
     strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[18])));
-    u8g2.setCursor(0, 6);
+    u8g2.setCursor(0, 7);
     u8g2.print(char_buffer);
 
     // Print version string
     strcpy_P(msg_buffer, (char*)ver_str);
-    u8g2.setCursor(6, 6);
+    u8g2.setCursor(6, 7);
     u8g2.print(msg_buffer);
 
     // Print logo XBM image
@@ -247,42 +247,42 @@ void setup() {
 
       // Print "ERASE DATA" text string
       strcpy_P(msg_buffer, (char*)pgm_read_word(&(messages[5])));
-      u8g2.setCursor(0, 20);
+      u8g2.setCursor(30, 20);
       u8g2.print(msg_buffer);
 
       // Print "?" text string
       strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[15])));
-      u8g2.setCursor(53, 20);
+      u8g2.setCursor(92, 20);
       u8g2.print(char_buffer);
 
       // Print "Y" text string
       strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[2])));
-      u8g2.setCursor(5, 40);
+      u8g2.setCursor(25, 40);
       u8g2.print(char_buffer);
 
       // Print "=" text string
       strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[10])));
-      u8g2.setCursor(12, 40);
+      u8g2.setCursor(32, 40);
       u8g2.print(char_buffer);
 
       // Print "SEL" text string
       strcpy_P(char_buffer, (char*)pgm_read_word(&(channel_name[9])));
-      u8g2.setCursor(19, 40);
+      u8g2.setCursor(39, 40);
       u8g2.print(char_buffer);
 
       // Print "N" text string
       strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[4])));
-      u8g2.setCursor(55, 40);
+      u8g2.setCursor(75, 40);
       u8g2.print(char_buffer);
 
       // Print "=" text string
       strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[10])));
-      u8g2.setCursor(62, 40);
+      u8g2.setCursor(82, 40);
       u8g2.print(char_buffer);
 
       // Print "UP" text string
       strcpy_P(char_buffer, (char*)pgm_read_word(&(channel_name[4])));
-      u8g2.setCursor(69, 40);
+      u8g2.setCursor(89, 40);
       u8g2.print(char_buffer);
 
 
@@ -292,11 +292,11 @@ void setup() {
 
       switch (readKeys()) {
         case 1:
-          // upbutton
+          // up button
           isWait = false;
           break;
         case 2:
-          // upbutton
+          // select button
           isWait = false;
 
           // Recall "Reset to default" macro
@@ -306,7 +306,7 @@ void setup() {
           do {
             // Print "ERASE DATA" text string
             strcpy_P(msg_buffer, (char*)pgm_read_word(&(messages[5])));
-            u8g2.setCursor(0, 20);
+            u8g2.setCursor(35, 20);
             u8g2.print(msg_buffer);
 
           } while (u8g2.nextPage());
@@ -324,10 +324,8 @@ void setup() {
   modelActual = storedDataEeprom(255);
   // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  // Set default font type used for all display sessions (mandatory)
-  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  u8g2.setFont(u8g2_font_5x7_tr);
+  
+  
 
   // for boot logo duration
   delay(800);

@@ -198,6 +198,8 @@ const char Message_3[] PROGMEM = "Don't";
 const char Message_4[] PROGMEM = "Move the Pots";
 const char Message_5[] PROGMEM = "ERASE DATA";
 const char Message_6[] PROGMEM = "WARNING !!!";
+const char Message_7[] PROGMEM = "MIN MAX";
+const char Message_8[] PROGMEM = "CENTER";
 
 const char* const messages[] PROGMEM = {
   Message_0,
@@ -206,7 +208,9 @@ const char* const messages[] PROGMEM = {
   Message_3,
   Message_4,
   Message_5,
-  Message_6
+  Message_6,
+  Message_7,
+  Message_8
 };
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

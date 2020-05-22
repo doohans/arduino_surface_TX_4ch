@@ -902,19 +902,19 @@ void Menu_4 () {
     char msg_buffer[21];
 
     strcpy_P(msg_buffer, (char*)pgm_read_word(&(messages[0])));
-    u8g2.setCursor(20, 12);
+    u8g2.setCursor(40, 12);
     u8g2.print(msg_buffer);
 
     strcpy_P(msg_buffer, (char*)pgm_read_word(&(channel_name[18])));
-    u8g2.setCursor(23, 28);
+    u8g2.setCursor(43, 35);
     u8g2.print(msg_buffer);
 
-    u8g2.setCursor(58, 28);
+    u8g2.setCursor(78, 35);
     u8g2.print(modelActual + 1);
 
     //model Name
     for (int i = 0; i < 5; i++) {
-      u8g2.setCursor(27 + i * 7, 38);
+      u8g2.setCursor(47 + i * 7, 55);
       u8g2.print(modelName[i]);
     }
 

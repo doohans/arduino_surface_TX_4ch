@@ -3,6 +3,7 @@ void Calibration() {
   // Set memory buffer for text strings
   char msg_buffer[21];
   char chName_buffer[6];
+  char char_buffer[2];
 
   // Setting default mid value reference for Min. Max. calibration
   for (int i = 0; i < CHANNELS; i++) {
@@ -35,48 +36,64 @@ void Calibration() {
     do {
 
       // Print header text
-      strcpy_P(msg_buffer, (char*)pgm_read_word(&(messages[2])));
-      u8g2.setCursor(15, 6);
+      strcpy_P(msg_buffer, (char*)pgm_read_word(&(messages[7])));
+      u8g2.setCursor(7, 7);
       u8g2.print(msg_buffer);
 
+      strcpy_P(msg_buffer, (char*)pgm_read_word(&(messages[2])));
+      u8g2.setCursor(55, 7);
+      u8g2.print(msg_buffer);
 
       // Drawing horizontal line under header and vertical/middle line
-      u8g2.drawHLine(0, 8, 84);
-      u8g2.drawVLine(42, 10, 25);
+      u8g2.drawHLine(0, 8, 128);
+      u8g2.drawVLine(64, 10, 30);
 
       // Print channel 1 name and value
       strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[0])));
-      u8g2.setCursor(0, 20);
+      u8g2.setCursor(5, 20);
       u8g2.print(chName_buffer);
-      u8g2.setCursor(20, 20);
+      u8g2.setCursor(30, 20);
       u8g2.print(read_adc(0));
 
       // Print channel 2 name and value
       strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[1])));
-      u8g2.setCursor(44, 20);
+      u8g2.setCursor(70, 20);
       u8g2.print(chName_buffer);
-      u8g2.setCursor(64, 20);
+      u8g2.setCursor(95, 20);
       u8g2.print(read_adc(1));
 
       // Print channel 3 name and value
       strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[2])));
-      u8g2.setCursor(0, 35);
+      u8g2.setCursor(5, 35);
       u8g2.print(chName_buffer);
-      u8g2.setCursor(20, 35);
+      u8g2.setCursor(30, 35);
       u8g2.print(read_adc(2));
 
       // Print channel 4 name and value
       strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[3])));
-      u8g2.setCursor(44, 35);
+      u8g2.setCursor(70, 35);
       u8g2.print(chName_buffer);
-      u8g2.setCursor(64, 35);
+      u8g2.setCursor(95, 35);
       u8g2.print(read_adc(3));
 
       // Print footer text
       strcpy_P(msg_buffer, (char*)pgm_read_word(&(messages[4])));
-      u8g2.setCursor(8, 48);
+      u8g2.setCursor(2, 54);
       u8g2.print(msg_buffer);
 
+      // Print Confirm msg
+      strcpy_P(msg_buffer, (char*)pgm_read_word(&(messages[0])));
+      u8g2.setCursor(2, 64);
+      u8g2.print(msg_buffer);
+      
+      strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[10])));
+      u8g2.setCursor(60, 64);
+      u8g2.print(char_buffer);
+      
+      strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[4])));
+      u8g2.setCursor(70, 64);
+      u8g2.print(chName_buffer);
+      
       delay(5);
 
       // Set statusCalib = 0 to exit calibration procedure by pressing ButtonUp
@@ -112,39 +129,56 @@ void Calibration() {
     do {
 
       // Print header text
+      strcpy_P(msg_buffer, (char*)pgm_read_word(&(messages[8])));
+      u8g2.setCursor(10, 7);
+      u8g2.print(msg_buffer);
+      
       strcpy_P(msg_buffer, (char*)pgm_read_word(&(messages[2])));
-      u8g2.setCursor(15, 6);
+      u8g2.setCursor(55, 7);
       u8g2.print(msg_buffer);
 
       // Drawing horizontal line under header and vertical/middle line
-      u8g2.drawHLine(0, 8, 84);
-      u8g2.drawVLine(42, 10, 25);
+      u8g2.drawHLine(0, 8, 128);
+      u8g2.drawVLine(64, 10, 30);
 
       // Print channel 1 name and value
       strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[0])));
-      u8g2.setCursor(0, 20);
+      u8g2.setCursor(5, 20);
       u8g2.print(chName_buffer);
-      u8g2.setCursor(20, 20);
+      u8g2.setCursor(30, 20);
       u8g2.print(read_adc(0));
 
       // Print channel 2 name and value
       strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[1])));
-      u8g2.setCursor(44, 20);
+      u8g2.setCursor(70, 20);
       u8g2.print(chName_buffer);
-      u8g2.setCursor(64, 20);
+      u8g2.setCursor(95, 20);
       u8g2.print(read_adc(1));
 
-      u8g2.setFont(u8g2_font_4x6_tr);
+      //u8g2.setFont(u8g2_font_4x6_tr);
       // Print footer text
       strcpy_P(msg_buffer, (char*)pgm_read_word(&(messages[3])));
-      u8g2.setCursor(2, 48);
+      u8g2.setCursor(2, 54);
       u8g2.print(msg_buffer);
 
       strcpy_P(msg_buffer, (char*)pgm_read_word(&(messages[4])));
-      u8g2.setCursor(27, 48);
+      u8g2.setCursor(37, 54);
       u8g2.print(msg_buffer);
 
-      u8g2.setFont(u8g2_font_5x7_tr);
+      // Print Confirm msg
+      strcpy_P(msg_buffer, (char*)pgm_read_word(&(messages[0])));
+      u8g2.setCursor(2, 64);
+      u8g2.print(msg_buffer);
+      
+      strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[10])));
+      u8g2.setCursor(60, 64);
+      u8g2.print(char_buffer);
+      
+      strcpy_P(chName_buffer, (char*)pgm_read_word(&(channel_name[4])));
+      u8g2.setCursor(70, 64);
+      u8g2.print(chName_buffer);
+      
+      //u8g2.setFont(u8g2_font_5x7_tr);
       delay(5);
 
       // Set statusCalib = 0 to exit calibration procedure by pressing ButtonUp
@@ -161,15 +195,15 @@ void Calibration() {
   do {
 
     // Changing font type
-    u8g2.setFont(u8g2_font_5x7_tr);
+    //u8g2.setFont(u8g2_font_5x7_tr);
 
     // Print storing data calibration message
     strcpy_P(msg_buffer, (char*)pgm_read_word(&(messages[0])));
-    u8g2.setCursor(5, 15);
+    u8g2.setCursor(30, 15);
     u8g2.print(msg_buffer);
 
     strcpy_P(msg_buffer, (char*)pgm_read_word(&(messages[2])));
-    u8g2.setCursor(5, 30);
+    u8g2.setCursor(27, 30);
     u8g2.print(msg_buffer);
 
   } while (u8g2.nextPage());
@@ -202,5 +236,5 @@ void Calibration() {
   delay(2000); // Screen message for 2sec
 
   // Set default font characher
-  u8g2.setFont(u8g2_font_5x7_tr);
+  //u8g2.setFont(u8g2_font_5x7_tr);
 }
