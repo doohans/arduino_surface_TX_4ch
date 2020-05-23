@@ -55,6 +55,14 @@ surfTX uses 12864-06d LCD screen.
 ![Screen09](https://github.com/doohans/arduino_surface_TX_4ch/blob/master/Images/screen09.jpg)
 ![Screen10](https://github.com/doohans/arduino_surface_TX_4ch/blob/master/Images/screen10.jpg)
 
+## Low Voltage Alarm
+You need modify Low Voltage Alarm value(minBat and maxBat). In my case, I use voltage step-up module(buck boost converter) to use 1s li-ion battery. If you use 2s li-po battery, modify like that minBat is 64 and maxBat is 84.
+
+```
+#define minBat 32                    // Minimum battery voltage for alarm (32 = 3.2V)
+#define maxBat 42                    // Maximum battery voltage (7V) (42 = 4.2V)
+```
+
 ## EEPROM Memory Map
 
 https://docs.google.com/spreadsheets/d/1R2shopYCNBNx50pZLSfzXPBwvNPSjA0mwf481hEYQtA/edit#gid=0
