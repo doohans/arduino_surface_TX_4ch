@@ -86,7 +86,7 @@ void Screen_0() {
     u8g2.setFont(u8g2_font_5x7_tr);
     u8g2.setFontMode(1);
     u8g2.setDrawColor(2);
-    u8g2.drawBox(92, 11, 8, 18);             // Trim Box
+    u8g2.drawBox(88, 11, 8, 18);             // Trim Box
     //u8g2.drawBox(50, 7, 7, 14);
     for (int i = 0; i < 2; i++) {
       // Print Sub Trim value
@@ -95,18 +95,18 @@ void Screen_0() {
       } else {
         strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[3])));
       }
-      u8g2.setCursor(94, 19 + i * 8);
+      u8g2.setCursor(90, 19 + i * 8);
       u8g2.print(char_buffer);
 
       strcpy_P(char_buffer, (char*)pgm_read_word(&(one_char[i])));
-      u8g2.setCursor(102, 19 + i * 8);
+      u8g2.setCursor(98, 19 + i * 8);
       u8g2.print(char_buffer);
 
-      u8g2.setCursor(110, 19 + i * 8);
+      u8g2.setCursor(106, 19 + i * 8);
       u8g2.print(subTrim[i]);
     }
     u8g2.setDrawColor(1);
-    u8g2.drawFrame(92, 11, 35, 18);             // Trim Box
+    u8g2.drawFrame(88, 11, 40, 18);             // Trim Box
     u8g2.setFontMode(0);
 
     // Print first 2 channels reference with input pots order
