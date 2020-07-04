@@ -59,8 +59,9 @@ U8G2_ST7565_ERC12864_1_4W_HW_SPI u8g2(U8G2_R0, /* cs=*/ 10, /* dc=*/ 9, /* reset
 #define swB 12                       // Switch B Digital pin (active LOW)
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#define minBat 32                    // Minimum battery voltage for alarm (32 = 3.2V)
+#define minBat 29                    // Minimum battery voltage for alarm (32 = 3.2V)
 #define maxBat 42                    // Maximum battery voltage (7V) (42 = 4.2V)
+#define corr_volt 2                  // Correction battery voltage
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

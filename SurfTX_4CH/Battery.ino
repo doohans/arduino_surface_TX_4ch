@@ -31,7 +31,7 @@ void batteryCheck() {
 
   // Calculating correct voltage value through voltage divider
   // Result = 2 digits with 2 decimal (eg 72 = 7.2V)
-  batt_volt = pin_batt_read * res_calc / 10;
+  batt_volt = (pin_batt_read * res_calc / 10) + corr_volt;
 
 
   //Serial.println (batt_volt);
