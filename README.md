@@ -58,11 +58,12 @@ surfTX uses 12864-06d LCD screen.
 ![Screen10](https://github.com/doohans/arduino_surface_TX_4ch/blob/master/Images/screen10.jpg)
 
 ## Low Voltage Alarm
-You need modify Low Voltage Alarm value(minBat and maxBat). In my case, I use voltage step-up module(buck boost converter) to use 1s li-ion battery. If you use 2s li-po battery, modify like that minBat is 64 and maxBat is 84.
+You need modify Low Voltage Alarm value(minBat and maxBat). In my case, I use voltage step-up module(buck boost converter) to use 1s li-ion battery. If you use 2s li-po battery, modify like that minBat is 64 and maxBat is 84. If there is a gap between measured voltage value and real voltage value, Modify "corr_volt" value for corrention.
 
 ```
 #define minBat 32                    // Minimum battery voltage for alarm (32 = 3.2V)
 #define maxBat 42                    // Maximum battery voltage (7V) (42 = 4.2V)
+#define corr_volt 2                  // Correction battery voltage
 ```
 
 ## EEPROM Memory Map
