@@ -610,7 +610,7 @@ void loop() {
         }
         // changing selected position character aschii value(DOWN)
         else {
-          if (modelName[modelNameSelection] > 0x21)
+          if (modelName[modelNameSelection] > 0x20)
             modelName[modelNameSelection]--;
         }
 
