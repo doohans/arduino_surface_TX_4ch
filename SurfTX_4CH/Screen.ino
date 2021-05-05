@@ -1113,6 +1113,10 @@ void Menu_7 () {
       u8g2.setCursor(7, 20 + i * 13);
       u8g2.print(chName_buffer);
 
+      // Print Exp value
+      u8g2.setCursor(34, 20 + i * 13);
+      u8g2.print(expo[i]);
+        
       if (menuSubActual - 1 == i) {
         if (expSelection == i) {
 
@@ -1133,12 +1137,6 @@ void Menu_7 () {
           u8g2.setCursor(0, 20 + i * 13);
           u8g2.print(char_buffer);
         }
-
-
-        // Print Exp value
-        u8g2.setCursor(34, 20 + i * 13);
-        u8g2.print(expo[i]);
-
 
         // Draw Exp Graph
         u8g2.drawHLine(53, 36, 75);
