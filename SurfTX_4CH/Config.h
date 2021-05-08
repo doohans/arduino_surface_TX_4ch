@@ -44,7 +44,7 @@ U8G2_ST7565_ERC12864_1_4W_HW_SPI u8g2(U8G2_R0, /* cs=*/ 10, /* dc=*/ 9, /* reset
 #define potCenter 512                // Pot Center reference value
 //#define numBytesPerModel 32          // Maximum bytes for data storage per model
 #define numBytesPerModel 25          // Maximum bytes for data storage per model
-#define drMax 200                    // Maximum dual rate value
+#define drMax 255                    // Maximum dual rate value
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Config pin assignment
@@ -91,7 +91,7 @@ U8G2_ST7565_ERC12864_1_4W_HW_SPI u8g2(U8G2_R0, /* cs=*/ 10, /* dc=*/ 9, /* reset
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // version
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-const char ver_str[] PROGMEM = "1.5";
+const char ver_str[] PROGMEM = "1.6";
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 unsigned short int ppm[CHANNELS];                       // ppm output array
